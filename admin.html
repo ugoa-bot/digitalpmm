@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Website Admin | Ugochinyere</title>
+<style>
+:root{--pink:#b2227a;--cream:#fdf4e2;--purple:#4a1354;--ink:#171217;--muted:#665f66;--line:#eadfe7}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,Arial,sans-serif;background:#f7f3f6;color:var(--ink)}button,input,textarea,select{font:inherit}.top{background:#000;color:#fff;padding:20px 5%;display:flex;justify-content:space-between;align-items:center}.top strong{font-size:18px}.wrap{width:min(1100px,92%);margin:35px auto}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px;margin-bottom:25px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.field{margin:14px 0}.field label{display:block;font-weight:700;font-size:13px;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;padding:12px;border:1px solid #d8ccd5;border-radius:8px}.field textarea{min-height:150px}.btn{border:0;border-radius:8px;padding:12px 18px;font-weight:700;cursor:pointer}.primary{background:var(--pink);color:#fff}.dark{background:#000;color:#fff}.danger{background:#eee;color:#a00}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.tabs button{background:#eee;color:#333}.tabs button.active{background:var(--purple);color:#fff}.hidden{display:none}.list{display:grid;gap:12px}.item{border:1px solid var(--line);padding:16px;border-radius:10px;display:flex;justify-content:space-between;gap:15px;align-items:center}.item small{color:var(--muted)}#status{margin:10px 0;font-weight:700}.thumb{width:80px;height:55px;object-fit:cover;border-radius:6px}@media(max-width:750px){.grid{grid-template-columns:1fr}.top{align-items:flex-start;gap:15px;flex-direction:column}.item{align-items:flex-start;flex-direction:column}}
+
+/* Full black site header */
+header,
+.site-header,
+.nav-wrap,
+.navbar,
+nav {
+  background: #000 !important;
+  color: #fff !important;
+}
+header::before,
+header::after,
+.site-header::before,
+.site-header::after {
+  background: #000 !important;
+}
+header a,
+.site-header a,
+.nav-wrap a,
+.navbar a,
+nav a {
+  color: #fff !important;
+}
+header .logo,
+header .brand,
+.site-header .logo,
+.site-header .brand {
+  color: #fff !important;
+}
+
+</style></head><body>
+<div class="top"><strong>Ugochinyere Website Admin</strong><button id="logout" class="btn dark">Log out</button></div>
+<div class="wrap">
+<div id="login" class="panel"><h1>Admin Login</h1><p>Sign in to manage blog posts, services and case studies.</p><div class="field"><label>Email</label><input id="email" type="email"></div><div class="field"><label>Password</label><input id="password" type="password"></div><button id="loginBtn" class="btn primary">Sign in</button><div id="loginStatus"></div></div>
+<div id="dashboard" class="hidden">
+<div id="status"></div>
+<div class="tabs"><button class="btn active" data-tab="posts">Blog Posts</button><button class="btn" data-tab="services">Services</button><button class="btn" data-tab="cases">Case Studies</button></div>
+
+<section id="posts" class="panel tab"><h2>Create / Edit Blog Post</h2><input type="hidden" id="postId"><div class="grid">
+<div><div class="field"><label>Title</label><input id="postTitle"></div><div class="field"><label>Slug</label><input id="postSlug"></div><div class="field"><label>Excerpt</label><textarea id="postExcerpt"></textarea></div><div class="field"><label>Content</label><textarea id="postContent"></textarea></div></div>
+<div><div class="field"><label>Featured image</label><input id="postImage" type="file" accept="image/*"></div><div class="field"><label>Image URL</label><input id="postImageUrl"></div><div class="field"><label>Published</label><select id="postPublished"><option value="true">Yes</option><option value="false">No</option></select></div><button id="savePost" class="btn primary">Save Post</button><button id="clearPost" class="btn">Clear</button></div></div><hr><h3>Existing posts</h3><div id="postList" class="list"></div></section>
+
+<section id="services" class="panel tab hidden"><h2>Create / Edit Service</h2><input type="hidden" id="serviceId"><div class="grid">
+<div><div class="field"><label>Service title</label><input id="serviceTitle"></div><div class="field"><label>Short description</label><textarea id="serviceDescription"></textarea></div><div class="field"><label>Full content</label><textarea id="serviceContent"></textarea></div></div>
+<div><div class="field"><label>Service image</label><input id="serviceImage" type="file" accept="image/*"></div><div class="field"><label>Image URL</label><input id="serviceImageUrl"></div><div class="field"><label>Published</label><select id="servicePublished"><option value="true">Yes</option><option value="false">No</option></select></div><button id="saveService" class="btn primary">Save Service</button><button id="clearService" class="btn">Clear</button></div></div><hr><h3>Existing services</h3><div id="serviceList" class="list"></div></section>
+
+<section id="cases" class="panel tab hidden"><h2>Create / Edit Case Study</h2><input type="hidden" id="caseId"><div class="grid">
+<div><div class="field"><label>Project title</label><input id="caseTitle"></div><div class="field"><label>Category</label><input id="caseCategory"></div><div class="field"><label>Description</label><textarea id="caseDescription"></textarea></div><div class="field"><label>Result</label><textarea id="caseResult"></textarea></div></div>
+<div><div class="field"><label>Project URL</label><input id="caseUrl"></div><div class="field"><label>Project image</label><input id="caseImage" type="file" accept="image/*"></div><div class="field"><label>Image URL</label><input id="caseImageUrl"></div><div class="field"><label>Published</label><select id="casePublished"><option value="true">Yes</option><option value="false">No</option></select></div><button id="saveCase" class="btn primary">Save Case Study</button><button id="clearCase" class="btn">Clear</button></div></div><hr><h3>Existing case studies</h3><div id="caseList" class="list"></div></section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>
+const cfg=window.SUPABASE_CONFIG||{};
+const ready=cfg.url&&cfg.anonKey&&!cfg.url.includes('YOUR_');
+const db=ready?window.supabase.createClient(cfg.url,cfg.anonKey):null;
+const $=id=>document.getElementById(id);
+function msg(t,error=false){$('status').textContent=t;$('status').style.color=error?'#a00':'#4a1354'}
+function loginMsg(t){$('loginStatus').textContent=t}
+async function check(){if(!db){loginMsg('Add your Supabase URL and anon key to supabase-config.js first.');return}const {data}=await db.auth.getSession();show(!!data.session)}
+function show(ok){$('login').classList.toggle('hidden',ok);$('dashboard').classList.toggle('hidden',!ok);if(ok){loadAll()}}
+$('loginBtn').onclick=async()=>{if(!db)return;const {error}=await db.auth.signInWithPassword({email:$('email').value,password:$('password').value});if(error)loginMsg(error.message);else show(true)}
+$('logout').onclick=async()=>{if(db)await db.auth.signOut();show(false)}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.tab').forEach(x=>x.classList.add('hidden'));$(b.dataset.tab).classList.remove('hidden')});
+function slugify(s){return s.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')}
+async function upload(file){if(!file)return '';const path=`${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g,'-')}`;const {error}=await db.storage.from('site-media').upload(path,file);if(error)throw error;return db.storage.from('site-media').getPublicUrl(path).data.publicUrl}
+async function loadAll(){await load('posts','postList','post');await load('services','serviceList','service');await load('case_studies','caseList','case')}
+async function load(table,target,prefix){const {data,error}=await db.from(table).select('*').order('created_at',{ascending:false});if(error){msg(error.message,true);return}$(target).innerHTML=data.map(x=>`<div class="item"><div>${x.image_url?`<img class="thumb" src="${x.image_url}">`:''}<strong>${esc(x.title)}</strong><br><small>${x.published?'Published':'Draft'}</small></div><div><button class="btn" onclick='edit${cap(prefix)}(${JSON.stringify(x)})'>Edit</button> <button class="btn danger" onclick='del("${table}","${x.id}")'>Delete</button></div></div>`).join('')||'<small>No entries yet.</small>'}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+async function del(table,id){if(!confirm('Delete this item?'))return;const {error}=await db.from(table).delete().eq('id',id);if(error)msg(error.message,true);else{msg('Deleted.');loadAll()}}
+window.editPost=x=>{$('postId').value=x.id;$('postTitle').value=x.title;$('postSlug').value=x.slug;$('postExcerpt').value=x.excerpt||'';$('postContent').value=x.content||'';$('postImageUrl').value=x.image_url||'';$('postPublished').value=x.published?'true':'false'}
+window.editService=x=>{$('serviceId').value=x.id;$('serviceTitle').value=x.title;$('serviceDescription').value=x.description||'';$('serviceContent').value=x.content||'';$('serviceImageUrl').value=x.image_url||'';$('servicePublished').value=x.published?'true':'false'}
+window.editCase=x=>{$('caseId').value=x.id;$('caseTitle').value=x.title;$('caseCategory').value=x.category||'';$('caseDescription').value=x.description||'';$('caseResult').value=x.result||'';$('caseUrl').value=x.url||'';$('caseImageUrl').value=x.image_url||'';$('casePublished').value=x.published?'true':'false'}
+$('savePost').onclick=async()=>{try{let image=$('postImageUrl').value||await upload($('postImage').files[0]);const row={title:$('postTitle').value,slug:$('postSlug').value||slugify($('postTitle').value),excerpt:$('postExcerpt').value,content:$('postContent').value,image_url:image,published:$('postPublished').value==='true',updated_at:new Date().toISOString()};const id=$('postId').value;const q=id?db.from('posts').update(row).eq('id',id):db.from('posts').insert(row);const {error}=await q;if(error)throw error;msg('Post saved.');clearPost();loadAll()}catch(e){msg(e.message,true)}}
+$('saveService').onclick=async()=>{try{let image=$('serviceImageUrl').value||await upload($('serviceImage').files[0]);const row={title:$('serviceTitle').value,description:$('serviceDescription').value,content:$('serviceContent').value,image_url:image,published:$('servicePublished').value==='true',updated_at:new Date().toISOString()};const id=$('serviceId').value;const q=id?db.from('services').update(row).eq('id',id):db.from('services').insert(row);const {error}=await q;if(error)throw error;msg('Service saved.');clearService();loadAll()}catch(e){msg(e.message,true)}}
+$('saveCase').onclick=async()=>{try{let image=$('caseImageUrl').value||await upload($('caseImage').files[0]);const row={title:$('caseTitle').value,category:$('caseCategory').value,description:$('caseDescription').value,result:$('caseResult').value,url:$('caseUrl').value,image_url:image,published:$('casePublished').value==='true',updated_at:new Date().toISOString()};const id=$('caseId').value;const q=id?db.from('case_studies').update(row).eq('id',id):db.from('case_studies').insert(row);const {error}=await q;if(error)throw error;msg('Case study saved.');clearCase();loadAll()}catch(e){msg(e.message,true)}}
+function clearPost(){$('postId').value='';['postTitle','postSlug','postExcerpt','postContent','postImageUrl'].forEach(x=>$(x).value='');$('postPublished').value='true'}
+function clearService(){$('serviceId').value='';['serviceTitle','serviceDescription','serviceContent','serviceImageUrl'].forEach(x=>$(x).value='');$('servicePublished').value='true'}
+function clearCase(){$('caseId').value='';['caseTitle','caseCategory','caseDescription','caseResult','caseUrl','caseImageUrl'].forEach(x=>$(x).value='');$('casePublished').value='true'}
+$('clearPost').onclick=clearPost;$('clearService').onclick=clearService;$('clearCase').onclick=clearCase;
+check();
+</script></body></html>
