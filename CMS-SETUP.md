@@ -26,3 +26,6 @@ The default visual images are from Unsplash and are used as presentation imagery
 
 ## Production note
 For the contact form, connect it to Netlify Forms, Formspree, or a server-side email endpoint before launch. The current site keeps the existing contact flow.
+
+## Blog editor
+The admin dashboard includes a visual rich-text editor for blog content. Use H2/H3, bold, italic, lists and links instead of typing Markdown symbols such as `**bold**`.

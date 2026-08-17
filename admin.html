@@ -34,6 +34,14 @@ header .brand,
   color: #fff !important;
 }
 
+
+.editor-toolbar{display:flex;gap:6px;flex-wrap:wrap;padding:10px;background:#f4eef3;border:1px solid #d8ccd5;border-bottom:0;border-radius:8px 8px 0 0}
+.editor-toolbar button{border:1px solid #d8ccd5;background:#fff;border-radius:6px;padding:7px 11px;cursor:pointer}
+.editor-toolbar button:hover{background:#fdf4e2}
+.rich-editor{min-height:360px;width:100%;padding:18px;border:1px solid #d8ccd5;border-radius:0 0 8px 8px;background:#fff;line-height:1.7;outline:none}
+.rich-editor:empty:before{content:attr(data-placeholder);color:#999}
+.rich-editor h2,.rich-editor h3{color:#4a1354;margin:24px 0 10px}
+.rich-editor p{margin:0 0 16px}.rich-editor ul{padding-left:24px}
 </style></head><body>
 <div class="top"><strong>Ugochinyere Website Admin</strong><button id="logout" class="btn dark">Log out</button></div>
 <div class="wrap">
@@ -43,7 +51,20 @@ header .brand,
 <div class="tabs"><button class="btn active" data-tab="posts">Blog Posts</button><button class="btn" data-tab="services">Services</button><button class="btn" data-tab="cases">Case Studies</button></div>
 
 <section id="posts" class="panel tab"><h2>Create / Edit Blog Post</h2><input type="hidden" id="postId"><div class="grid">
-<div><div class="field"><label>Title</label><input id="postTitle"></div><div class="field"><label>Slug</label><input id="postSlug"></div><div class="field"><label>Excerpt</label><textarea id="postExcerpt"></textarea></div><div class="field"><label>Content</label><textarea id="postContent"></textarea></div></div>
+<div><div class="field"><label>Title</label><input id="postTitle"></div><div class="field"><label>Slug</label><input id="postSlug"></div><div class="field"><label>Excerpt</label><textarea id="postExcerpt"></textarea></div><div class="field">
+<label>Content</label>
+<div class="editor-toolbar">
+  <button type="button" data-cmd="formatBlock" data-val="h2">H2</button>
+  <button type="button" data-cmd="formatBlock" data-val="h3">H3</button>
+  <button type="button" data-cmd="bold"><strong>B</strong></button>
+  <button type="button" data-cmd="italic"><em>I</em></button>
+  <button type="button" data-cmd="insertUnorderedList">• List</button>
+  <button type="button" data-cmd="createLink">Link</button>
+  <button type="button" data-cmd="removeFormat">Clear</button>
+</div>
+<div id="postContentEditor" class="rich-editor" contenteditable="true" data-placeholder="Write your article here..."></div>
+<textarea id="postContent" hidden></textarea>
+</div></div>
 <div><div class="field"><label>Featured image</label><input id="postImage" type="file" accept="image/*"></div><div class="field"><label>Image URL</label><input id="postImageUrl"></div><div class="field"><label>Published</label><select id="postPublished"><option value="true">Yes</option><option value="false">No</option></select></div><button id="savePost" class="btn primary">Save Post</button><button id="clearPost" class="btn">Clear</button></div></div><hr><h3>Existing posts</h3><div id="postList" class="list"></div></section>
 
 <section id="services" class="panel tab hidden"><h2>Create / Edit Service</h2><input type="hidden" id="serviceId"><div class="grid">
@@ -74,13 +95,16 @@ async function load(table,target,prefix){const {data,error}=await db.from(table)
 function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 async function del(table,id){if(!confirm('Delete this item?'))return;const {error}=await db.from(table).delete().eq('id',id);if(error)msg(error.message,true);else{msg('Deleted.');loadAll()}}
-window.editPost=x=>{$('postId').value=x.id;$('postTitle').value=x.title;$('postSlug').value=x.slug;$('postExcerpt').value=x.excerpt||'';$('postContent').value=x.content||'';$('postImageUrl').value=x.image_url||'';$('postPublished').value=x.published?'true':'false'}
+window.editPost=x=>{$('postId').value=x.id;$('postTitle').value=x.title;$('postSlug').value=x.slug;$('postExcerpt').value=x.excerpt||'';$('postContent').value=x.content||'';
+$('postContentEditor').innerHTML = x.content && /<\/?[a-z][\s\S]*>/i.test(x.content)
+  ? x.content
+  : String(x.content||'').split(/\n\s*\n/).map(v=>'<p>'+esc(v).replace(/\n/g,'<br>')+'</p>').join('');$('postImageUrl').value=x.image_url||'';$('postPublished').value=x.published?'true':'false'}
 window.editService=x=>{$('serviceId').value=x.id;$('serviceTitle').value=x.title;$('serviceDescription').value=x.description||'';$('serviceContent').value=x.content||'';$('serviceImageUrl').value=x.image_url||'';$('servicePublished').value=x.published?'true':'false'}
 window.editCase=x=>{$('caseId').value=x.id;$('caseTitle').value=x.title;$('caseCategory').value=x.category||'';$('caseDescription').value=x.description||'';$('caseResult').value=x.result||'';$('caseUrl').value=x.url||'';$('caseImageUrl').value=x.image_url||'';$('casePublished').value=x.published?'true':'false'}
-$('savePost').onclick=async()=>{try{let image=$('postImageUrl').value||await upload($('postImage').files[0]);const row={title:$('postTitle').value,slug:$('postSlug').value||slugify($('postTitle').value),excerpt:$('postExcerpt').value,content:$('postContent').value,image_url:image,published:$('postPublished').value==='true',updated_at:new Date().toISOString()};const id=$('postId').value;const q=id?db.from('posts').update(row).eq('id',id):db.from('posts').insert(row);const {error}=await q;if(error)throw error;msg('Post saved.');clearPost();loadAll()}catch(e){msg(e.message,true)}}
+$('savePost').onclick=async()=>{try{let image=$('postImageUrl').value||await upload($('postImage').files[0]);const row={title:$('postTitle').value,slug:$('postSlug').value||slugify($('postTitle').value),excerpt:$('postExcerpt').value,content:$('postContentEditor').innerHTML,image_url:image,published:$('postPublished').value==='true',updated_at:new Date().toISOString()};const id=$('postId').value;const q=id?db.from('posts').update(row).eq('id',id):db.from('posts').insert(row);const {error}=await q;if(error)throw error;msg('Post saved.');clearPost();loadAll()}catch(e){msg(e.message,true)}}
 $('saveService').onclick=async()=>{try{let image=$('serviceImageUrl').value||await upload($('serviceImage').files[0]);const row={title:$('serviceTitle').value,description:$('serviceDescription').value,content:$('serviceContent').value,image_url:image,published:$('servicePublished').value==='true',updated_at:new Date().toISOString()};const id=$('serviceId').value;const q=id?db.from('services').update(row).eq('id',id):db.from('services').insert(row);const {error}=await q;if(error)throw error;msg('Service saved.');clearService();loadAll()}catch(e){msg(e.message,true)}}
 $('saveCase').onclick=async()=>{try{let image=$('caseImageUrl').value||await upload($('caseImage').files[0]);const row={title:$('caseTitle').value,category:$('caseCategory').value,description:$('caseDescription').value,result:$('caseResult').value,url:$('caseUrl').value,image_url:image,published:$('casePublished').value==='true',updated_at:new Date().toISOString()};const id=$('caseId').value;const q=id?db.from('case_studies').update(row).eq('id',id):db.from('case_studies').insert(row);const {error}=await q;if(error)throw error;msg('Case study saved.');clearCase();loadAll()}catch(e){msg(e.message,true)}}
-function clearPost(){$('postId').value='';['postTitle','postSlug','postExcerpt','postContent','postImageUrl'].forEach(x=>$(x).value='');$('postPublished').value='true'}
+function clearPost(){$('postId').value='';['postTitle','postSlug','postExcerpt','postContent','postImageUrl'].forEach(x=>$(x).value='');$('postContentEditor').innerHTML='';$('postPublished').value='true'}
 function clearService(){$('serviceId').value='';['serviceTitle','serviceDescription','serviceContent','serviceImageUrl'].forEach(x=>$(x).value='');$('servicePublished').value='true'}
 function clearCase(){$('caseId').value='';['caseTitle','caseCategory','caseDescription','caseResult','caseUrl','caseImageUrl'].forEach(x=>$(x).value='');$('casePublished').value='true'}
 $('clearPost').onclick=clearPost;$('clearService').onclick=clearService;$('clearCase').onclick=clearCase;
