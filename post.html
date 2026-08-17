@@ -48,6 +48,10 @@ h1{font-size:clamp(38px,6vw,62px);line-height:1.05;color:var(--purple);margin:12
  h1{font-size:40px}
  .article-content{font-size:17px}
 }
+
+.article-nav{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:28px}
+.article-nav select{min-width:260px;padding:11px 14px;border:1px solid #d8ccd5;border-radius:8px;background:#fff;color:#171217}
+@media(max-width:650px){.article-nav{flex-direction:column;align-items:stretch}.article-nav select{width:100%}}
 </style>
 </head>
 <body>
@@ -63,7 +67,10 @@ h1{font-size:clamp(38px,6vw,62px);line-height:1.05;color:var(--purple);margin:12
 </header>
 
 <main class="wrap">
+  <div class="article-nav">
   <a class="back" href="blog.html">← Back to Blog</a>
+  <select id="otherArticles" aria-label="Read another article"><option value="">Read another article...</option></select>
+</div>
   <div id="post"><p>Loading article...</p></div>
 </main>
 
@@ -100,11 +107,17 @@ function markdownToHtml(value){
   const target=document.getElementById('post');
   const c=window.SUPABASE_CONFIG||{};
   const id=new URLSearchParams(location.search).get('id');
+  const other=document.getElementById('otherArticles');
+
   if(!id){target.innerHTML='<p>Article not found.</p>';return;}
   if(!c.url||!c.anonKey||c.url.includes('YOUR_')){target.innerHTML='<p>Connect Supabase to display published articles.</p>';return;}
   try{
     const db=supabase.createClient(c.url,c.anonKey);
-    const {data,error}=await db.from('posts').select('*').eq('id',id).eq('published',true).single();
+    const now=new Date().toISOString();
+    const {data:others}=await db.from('posts').select('id,title,publish_at').eq('published',true).or('publish_at.is.null,publish_at.lte.'+now).neq('id',id).order('created_at',{ascending:false});
+    if(other && others){ others.forEach(x=>{const o=document.createElement('option');o.value=x.id;o.textContent=x.title;other.appendChild(o);}); other.addEventListener('change',()=>{if(other.value) location.href='post.html?id='+encodeURIComponent(other.value);}); }
+
+    const {data,error}=await db.from('posts').select('*').eq('id',id).eq('published',true).or('publish_at.is.null,publish_at.lte.'+new Date().toISOString()).single();
     if(error||!data){target.innerHTML='<p>Article not found.</p>';return;}
     document.title=data.title+' | Ugochinyere Amaonyeanaso';
     const validImage=typeof data.image_url==='string' && /^https?:\/\//i.test(data.image_url.trim());
