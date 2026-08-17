@@ -29,6 +29,3 @@ For the contact form, connect it to Netlify Forms, Formspree, or a server-side e
 
 ## Blog editor
 The admin dashboard includes a visual rich-text editor for blog content. Use H2/H3, bold, italic, lists and links instead of typing Markdown symbols such as `**bold**`.
-
-## Blog scheduling
-Run `supabase-schedule-migration.sql` once in the Supabase SQL Editor. The admin dashboard then supports Publish immediately, Schedule for later, and Save as draft. Scheduled posts appear in the admin list but are not publicly visible until their scheduled time.

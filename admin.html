@@ -43,9 +43,9 @@ header .brand,
 .rich-editor h2,.rich-editor h3{color:#4a1354;margin:24px 0 10px}
 .rich-editor p{margin:0 0 16px}.rich-editor ul{padding-left:24px}
 
-.schedule-note{font-size:13px;color:#665f66}
-#postImagePreview img{object-fit:cover;border-radius:8px;border:1px solid #ddd}
-@media(max-width:750px){.tabs{display:grid;grid-template-columns:1fr}.tabs .btn{width:100%}.grid{grid-template-columns:1fr!important}.panel{padding:20px}.editor-toolbar{position:sticky;top:0;z-index:2}.rich-editor{min-height:280px}}
+.post-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.post-actions .btn{cursor:pointer}
+.hidden{display:none!important}
+.post-status{font-weight:700}
 </style></head><body>
 <div class="top"><strong>Ugochinyere Website Admin</strong><button id="logout" class="btn dark">Log out</button></div>
 <div class="wrap">
@@ -69,7 +69,13 @@ header .brand,
 <div id="postContentEditor" class="rich-editor" contenteditable="true" data-placeholder="Write your article here..."></div>
 <textarea id="postContent" hidden></textarea>
 </div></div>
-<div><div class="field"><label>Featured image</label><input id="postImage" type="file" accept="image/*"></div><div class="field"><label>Image URL</label><input id="postImageUrl"></div><div id="postImagePreview"></div><div class="field"><label>Publishing</label><select id="postPublishMode"><option value="publish">Publish immediately</option><option value="schedule">Schedule for later</option><option value="draft">Save as draft</option></select></div><div class="field" id="scheduleField" style="display:none"><label>Publish date & time</label><input id="postPublishAt" type="datetime-local"></div><button id="savePost" class="btn primary">Save Post</button><button id="clearPost" class="btn">Clear</button></div></div><hr><h3>Existing posts</h3><div id="postList" class="list"></div></section>
+<div>
+<div class="field"><label>Featured image</label><input id="postImage" type="file" accept="image/*"><small>Upload an image or use an image URL.</small></div>
+<div class="field"><label>Image URL</label><input id="postImageUrl"></div>
+<div class="field"><label>Publication status</label><select id="postStatus"><option value="draft">Save as Draft</option><option value="published">Publish Immediately</option><option value="scheduled">Schedule Post</option></select></div>
+<div class="field hidden" id="scheduleField"><label>Schedule date & time</label><input id="postScheduledAt" type="datetime-local"></div>
+<div class="post-actions"><button id="saveDraft" class="btn">Save Draft</button><button id="publishPost" class="btn primary">Publish Post</button><button id="schedulePost" class="btn">Schedule Post</button><button id="clearPost" class="btn">Clear</button></div>
+</div></div><hr><h3>Existing posts</h3><div id="postList" class="list"></div></section>
 
 <section id="services" class="panel tab hidden"><h2>Create / Edit Service</h2><input type="hidden" id="serviceId"><div class="grid">
 <div><div class="field"><label>Service title</label><input id="serviceTitle"></div><div class="field"><label>Short description</label><textarea id="serviceDescription"></textarea></div><div class="field"><label>Full content</label><textarea id="serviceContent"></textarea></div></div>
@@ -95,27 +101,56 @@ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.que
 function slugify(s){return s.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')}
 async function upload(file){if(!file)return '';const path=`${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g,'-')}`;const {error}=await db.storage.from('site-media').upload(path,file);if(error)throw error;return db.storage.from('site-media').getPublicUrl(path).data.publicUrl}
 async function loadAll(){await load('posts','postList','post');await load('services','serviceList','service');await load('case_studies','caseList','case')}
-async function load(table,target,prefix){const {data,error}=await db.from(table).select('*').order('created_at',{ascending:false});if(error){msg(error.message,true);return}$(target).innerHTML=data.map(x=>`<div class="item"><div>${x.image_url?`<img class="thumb" src="${x.image_url}">`:''}<strong>${esc(x.title)}</strong><br><small>${x.published ? (x.publish_at && new Date(x.publish_at)>new Date() ? 'Scheduled for '+new Date(x.publish_at).toLocaleString() : 'Published') : 'Draft'}</small></div><div><button class="btn" onclick='edit${cap(prefix)}(${JSON.stringify(x)})'>Edit</button> <button class="btn danger" onclick='del("${table}","${x.id}")'>Delete</button></div></div>`).join('')||'<small>No entries yet.</small>'}
+async function load(table,target,prefix){
+ const {data,error}=await db.from(table).select('*').order('created_at',{ascending:false});
+ if(error){msg(error.message,true);return}
+ $(target).innerHTML=data.map(x=>{
+   let state=x.published?'Published':'Draft';
+   if(x.scheduled_at && !x.published && new Date(x.scheduled_at)>new Date()) state='Scheduled for '+new Date(x.scheduled_at).toLocaleString();
+   return `<div class="item"><div>${x.image_url?`<img class="thumb" src="${esc(x.image_url)}">`:''}<strong>${esc(x.title)}</strong><br><small>${esc(state)}</small></div><div><button class="btn" onclick='edit${cap(prefix)}(${JSON.stringify(x)})'>Edit</button> <button class="btn danger" onclick='del("${table}","${x.id}")'>Delete</button></div></div>`
+ }).join('')||'<small>No entries yet.</small>'
+}
 function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
 function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 async function del(table,id){if(!confirm('Delete this item?'))return;const {error}=await db.from(table).delete().eq('id',id);if(error)msg(error.message,true);else{msg('Deleted.');loadAll()}}
 window.editPost=x=>{
-$('postId').value=x.id;$('postTitle').value=x.title;$('postSlug').value=x.slug;$('postExcerpt').value=x.excerpt||'';$('postContent').value=x.content||'';
-$('postContentEditor').innerHTML = x.content && /<\/?[a-z][\s\S]*>/i.test(x.content) ? x.content : String(x.content||'').split(/\n\s*\n/).map(v=>'<p>'+esc(v).replace(/\n/g,'<br>')+'</p>').join('');
-$('postImageUrl').value=x.image_url||'';
-if(x.publish_at && x.published && new Date(x.publish_at)>new Date()){ $('postPublishMode').value='schedule'; $('postPublishAt').value=new Date(x.publish_at).toISOString().slice(0,16); } else if(x.published){ $('postPublishMode').value='publish'; $('postPublishAt').value=''; } else { $('postPublishMode').value='draft'; $('postPublishAt').value=''; }
-toggleSchedule(); showImagePreview(x.image_url||'');
+ $('postId').value=x.id;$('postTitle').value=x.title;$('postSlug').value=x.slug;$('postExcerpt').value=x.excerpt||'';$('postContent').value=x.content||'';
+ $('postContentEditor').innerHTML=x.content&&/<\/?[a-z][\s\S]*>/i.test(x.content)?x.content:String(x.content||'').split(/\n\s*\n/).map(v=>'<p>'+esc(v).replace(/\n/g,'<br>')+'</p>').join('');
+ $('postImageUrl').value=x.image_url||'';
+ if(x.scheduled_at && !x.published){$('postStatus').value='scheduled';$('postScheduledAt').value=toLocalInput(x.scheduled_at)}else{$('postStatus').value=x.published?'published':'draft';$('postScheduledAt').value='';}
+ toggleSchedule();
 }
 window.editService=x=>{$('serviceId').value=x.id;$('serviceTitle').value=x.title;$('serviceDescription').value=x.description||'';$('serviceContent').value=x.content||'';$('serviceImageUrl').value=x.image_url||'';$('servicePublished').value=x.published?'true':'false'}
 window.editCase=x=>{$('caseId').value=x.id;$('caseTitle').value=x.title;$('caseCategory').value=x.category||'';$('caseDescription').value=x.description||'';$('caseResult').value=x.result||'';$('caseUrl').value=x.url||'';$('caseImageUrl').value=x.image_url||'';$('casePublished').value=x.published?'true':'false'}
-$('savePost').onclick=async()=>{try{let image=$('postImageUrl').value||await upload($('postImage').files[0]);const mode=$('postPublishMode').value;const scheduled=mode==='schedule';const row={title:$('postTitle').value,slug:$('postSlug').value||slugify($('postTitle').value),excerpt:$('postExcerpt').value,content:$('postContentEditor').innerHTML,image_url:image,published:mode!=='draft',publish_at:scheduled && $('postPublishAt').value ? new Date($('postPublishAt').value).toISOString() : null,updated_at:new Date().toISOString()};const id=$('postId').value;const q=id?db.from('posts').update(row).eq('id',id):db.from('posts').insert(row);const {error}=await q;if(error)throw error;msg('Post saved.');clearPost();loadAll()}catch(e){msg(e.message,true)}}
+function toLocalInput(v){const d=new Date(v);const pad=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`}
+function toggleSchedule(){const show=$('postStatus').value==='scheduled';$('scheduleField').classList.toggle('hidden',!show);$('schedulePost').classList.toggle('hidden',!show)}
+$('postStatus').onchange=toggleSchedule;
+async function savePostWithStatus(status){
+ try{
+  let image=$('postImageUrl').value||await upload($('postImage').files[0]);
+  let scheduledAt=null,published=false;
+  if(status==='published'){published=true}
+  if(status==='scheduled'){
+    if(!$('postScheduledAt').value) throw new Error('Choose a date and time for the scheduled post.');
+    const chosen=new Date($('postScheduledAt').value);
+    if(chosen<=new Date()) throw new Error('The scheduled time must be in the future.');
+    scheduledAt=chosen.toISOString();
+  }
+  const row={title:$('postTitle').value,slug:$('postSlug').value||slugify($('postTitle').value),excerpt:$('postExcerpt').value,content:$('postContentEditor').innerHTML,image_url:image,published,scheduled_at:scheduledAt,updated_at:new Date().toISOString()};
+  if(!row.title||!row.content)throw new Error('Add a title and article content before publishing.');
+  const id=$('postId').value;
+  const q=id?db.from('posts').update(row).eq('id',id):db.from('posts').insert(row);
+  const {error}=await q;if(error)throw error;
+  msg(status==='published'?'Post published.':status==='scheduled'?'Post scheduled.':'Draft saved.');
+  clearPost();loadAll();
+ }catch(e){msg(e.message,true)}
+}
+$('saveDraft').onclick=()=>savePostWithStatus('draft');
+$('publishPost').onclick=()=>savePostWithStatus('published');
+$('schedulePost').onclick=()=>savePostWithStatus('scheduled');
 $('saveService').onclick=async()=>{try{let image=$('serviceImageUrl').value||await upload($('serviceImage').files[0]);const row={title:$('serviceTitle').value,description:$('serviceDescription').value,content:$('serviceContent').value,image_url:image,published:$('servicePublished').value==='true',updated_at:new Date().toISOString()};const id=$('serviceId').value;const q=id?db.from('services').update(row).eq('id',id):db.from('services').insert(row);const {error}=await q;if(error)throw error;msg('Service saved.');clearService();loadAll()}catch(e){msg(e.message,true)}}
 $('saveCase').onclick=async()=>{try{let image=$('caseImageUrl').value||await upload($('caseImage').files[0]);const row={title:$('caseTitle').value,category:$('caseCategory').value,description:$('caseDescription').value,result:$('caseResult').value,url:$('caseUrl').value,image_url:image,published:$('casePublished').value==='true',updated_at:new Date().toISOString()};const id=$('caseId').value;const q=id?db.from('case_studies').update(row).eq('id',id):db.from('case_studies').insert(row);const {error}=await q;if(error)throw error;msg('Case study saved.');clearCase();loadAll()}catch(e){msg(e.message,true)}}
-function toggleSchedule(){const show=$('postPublishMode').value==='schedule';$('scheduleField').style.display=show?'block':'none'}
-$('postPublishMode').addEventListener('change',toggleSchedule);
-function showImagePreview(url){const el=$('postImagePreview');el.innerHTML='';if(url&&/^https?:\/\//i.test(url)){const img=document.createElement('img');img.src=url;img.className='thumb';img.style.width='180px';img.style.height='110px';img.style.marginTop='8px';el.appendChild(img)}}
-$('postImage').addEventListener('change',async()=>{try{const f=$('postImage').files[0];if(f){const url=await upload(f);$('postImageUrl').value=url;showImagePreview(url);msg('Image uploaded. Save the post to keep it.')}}catch(e){msg(e.message,true)}});
-function clearPost(){$('postId').value='';['postTitle','postSlug','postExcerpt','postContent','postImageUrl'].forEach(x=>$(x).value='');$('postContentEditor').innerHTML='';$('postPublishMode').value='publish';$('postPublishAt').value='';toggleSchedule();$('postImage').value='';$('postImagePreview').innerHTML=''}
+function clearPost(){$('postId').value='';['postTitle','postSlug','postExcerpt','postContent','postImageUrl','postScheduledAt'].forEach(x=>$(x).value='');$('postContentEditor').innerHTML='';$('postStatus').value='draft';toggleSchedule();}
 function clearService(){$('serviceId').value='';['serviceTitle','serviceDescription','serviceContent','serviceImageUrl'].forEach(x=>$(x).value='');$('servicePublished').value='true'}
 function clearCase(){$('caseId').value='';['caseTitle','caseCategory','caseDescription','caseResult','caseUrl','caseImageUrl'].forEach(x=>$(x).value='');$('casePublished').value='true'}
 $('clearPost').onclick=clearPost;$('clearService').onclick=clearService;$('clearCase').onclick=clearCase;
