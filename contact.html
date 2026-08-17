@@ -51,12 +51,52 @@ header .brand,
   color: #fff !important;
 }
 
+
+/* Responsive site-wide fixes */
+html,body{max-width:100%;overflow-x:hidden}
+img{max-width:100%;height:auto}
+header{background:#000!important;position:sticky!important;top:0!important}
+.nav{min-height:82px}
+.navlinks{flex-wrap:wrap}
+@media(max-width:850px){
+  .container{width:min(100% - 32px,1140px)}
+  .nav{min-height:70px}
+  .logo{font-size:14px;max-width:235px;line-height:1.25}
+  .menu{display:block!important}
+  .navlinks{display:none!important;position:absolute;top:70px;left:0;right:0;background:#000!important;padding:14px 5%!important;flex-direction:column!important;align-items:stretch!important;gap:2px!important;border-top:1px solid #222;box-shadow:0 14px 30px rgba(0,0,0,.28)}
+  .navlinks.open{display:flex!important}
+  .navlinks a{padding:11px 0!important;color:#fff!important}
+  .navlinks .btn{width:100%;text-align:center}
+  .hero{min-height:650px!important;padding:100px 0 60px!important}
+  .hero h1{font-size:clamp(38px,11vw,54px)!important}
+  .hero p{font-size:16px!important}
+  .actions{align-items:stretch}
+  .actions .btn{width:100%}
+  .page-hero{padding:105px 0 55px!important}
+  .page-hero h1{font-size:clamp(38px,10vw,54px)!important}
+  .section{padding:58px 0!important}
+  .section-title{margin-bottom:28px!important}
+  .section-title h2,.section-title h3{font-size:clamp(28px,8vw,38px)!important}
+  .grid-2,.grid-3,.contact-grid,.footer-grid,.about-grid{grid-template-columns:1fr!important}
+  .card{padding:22px!important}
+  .about-photo{max-width:100%!important}
+  .footer-grid{gap:25px!important}
+  .social{flex-wrap:wrap}
+  .whatsapp{width:52px!important;height:52px!important;right:16px!important;bottom:16px!important}
+}
+
+/* Black section background update */
+.section-soft,.section-cream,.page-hero{background:#000!important;color:#fff}
+.page-hero h1,.page-hero h2,.page-hero h3{color:#fff!important}
+.page-hero p,.section-soft p,.section-cream p{color:#d8d0d7!important}
+.section-soft .section-title h2,.section-soft .section-title h3,
+.section-cream .section-title h2,.section-cream .section-title h3{color:#fff!important}
 </style></head><body><header><div class="container nav">
 <a class="logo" href="index.html">Digital Project Management Services</a>
 <nav class="navlinks">
 <a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">Projects</a><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
 <a class="btn btn-primary" href="https://calendly.com/ugochinyere" target="_blank">Book a Consultation</a>
-</nav><button class="menu">☰</button></div></header><main><section class="page-hero"><div class="container"><h2 class="kicker">Contact</h2><h1>Let's Talk About Your Project</h1><p>Tell me what you're working on, what you're trying to achieve, and where you need support.</p></div></section>
+</nav><button class="menu" aria-label="Open menu" aria-expanded="false">☰</button></div></header><main><section class="page-hero"><div class="container"><h2 class="kicker">Contact</h2><h1>Let's Talk About Your Project</h1><p>Tell me what you're working on, what you're trying to achieve, and where you need support.</p></div></section>
 <section class="section"><div class="container"><div class="contact-grid"><div><div class="card"><h3>Prefer to book a call directly?</h3><p>Choose a time that works for you through my Calendly.</p><a class="btn btn-primary" href="https://calendly.com/ugochinyere" target="_blank">Book a Consultation</a></div></div>
 <form class="form" action="mailto:ugoamaonye@gmail.com" method="post" enctype="text/plain"><label>Full Name *</label><input name="Full Name" required><label>Email Address *</label><input type="email" name="Email" required><label>Company / Business Name</label><input name="Company"><label>What do you need help with?</label><select name="Service"><option>Digital Project Management</option><option>Digital Project Management Consulting</option><option>Website Development</option><option>SEO</option><option>Technical SEO</option><option>On-Page SEO</option><option>Local SEO</option><option>Google Business Profile</option><option>GEO / AEO</option><option>Website Audit</option><option>Other</option></select><label>Tell me about your project</label><textarea name="Project"></textarea><label>What are you hoping to achieve?</label><textarea name="Goal"></textarea><label>Preferred contact method</label><select name="Contact Method"><option>Email</option><option>WhatsApp</option><option>Zoom</option></select><button class="btn btn-primary" type="submit">Send My Request</button></form></div></div></section></main><footer><div class="container"><div class="footer-grid">
 <div><div class="footer-logo">Digital Project Management Services</div><p>I help organizations manage digital projects and help businesses build, improve, and grow their online presence.</p></div>
@@ -68,4 +108,19 @@ header .brand,
 <a href="https://www.tiktok.com/@businessvisibilityexpert" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3c.35 2.1 1.53 3.42 3.5 3.7V10c-1.3-.05-2.48-.42-3.5-1.02v6.1a5.92 5.92 0 1 1-5.92-5.92c.34 0 .67.03.99.08v3.38a2.66 2.66 0 1 0 1.66 2.46V3H15Z"/></svg></a>
 </div><p><a href="https://calendly.com/ugochinyere" target="_blank">Book a Consultation →</a></p></div>
 </div><div class="copy">© 2026 Ugochinyere Amaonyeanaso. All rights reserved.</div></div></footer>
-<a class="whatsapp" href="https://wa.me/2348103716553" target="_blank" rel="noopener" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">WA</a></body></html>
+<a class="whatsapp" href="https://wa.me/2348103716553" target="_blank" rel="noopener" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">WA</a>
+<script>
+(function(){
+ const btn=document.querySelector('.menu');
+ const nav=document.querySelector('.navlinks');
+ if(!btn||!nav)return;
+ btn.setAttribute('aria-expanded','false');
+ btn.addEventListener('click',function(){
+   const open=nav.classList.toggle('open');
+   btn.setAttribute('aria-expanded',open?'true':'false');
+   btn.textContent=open?'×':'☰';
+ });
+ nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.textContent='☰';}));
+})();
+</script>
+</body></html>

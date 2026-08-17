@@ -51,12 +51,52 @@ header .brand,
   color: #fff !important;
 }
 
-.post-card{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#fff}.post-card img{width:100%;height:210px;object-fit:cover;display:block}.post-card-body{padding:22px}.post-card h3{margin:0 0 10px;color:var(--purple);font-size:22px}.post-card p{color:var(--muted);line-height:1.6;font-size:14px}.post-card a{color:var(--pink);font-weight:800;text-decoration:none}.post-date{font-size:12px;color:#8a8088;margin-bottom:10px}</style></head><body><header><div class="container nav">
+.post-card{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#fff}.post-card img{width:100%;height:210px;object-fit:cover;display:block}.post-card-body{padding:22px}.post-card h3{margin:0 0 10px;color:var(--purple);font-size:22px}.post-card p{color:var(--muted);line-height:1.6;font-size:14px}.post-card a{color:var(--pink);font-weight:800;text-decoration:none}.post-date{font-size:12px;color:#8a8088;margin-bottom:10px}
+/* Responsive site-wide fixes */
+html,body{max-width:100%;overflow-x:hidden}
+img{max-width:100%;height:auto}
+header{background:#000!important;position:sticky!important;top:0!important}
+.nav{min-height:82px}
+.navlinks{flex-wrap:wrap}
+@media(max-width:850px){
+  .container{width:min(100% - 32px,1140px)}
+  .nav{min-height:70px}
+  .logo{font-size:14px;max-width:235px;line-height:1.25}
+  .menu{display:block!important}
+  .navlinks{display:none!important;position:absolute;top:70px;left:0;right:0;background:#000!important;padding:14px 5%!important;flex-direction:column!important;align-items:stretch!important;gap:2px!important;border-top:1px solid #222;box-shadow:0 14px 30px rgba(0,0,0,.28)}
+  .navlinks.open{display:flex!important}
+  .navlinks a{padding:11px 0!important;color:#fff!important}
+  .navlinks .btn{width:100%;text-align:center}
+  .hero{min-height:650px!important;padding:100px 0 60px!important}
+  .hero h1{font-size:clamp(38px,11vw,54px)!important}
+  .hero p{font-size:16px!important}
+  .actions{align-items:stretch}
+  .actions .btn{width:100%}
+  .page-hero{padding:105px 0 55px!important}
+  .page-hero h1{font-size:clamp(38px,10vw,54px)!important}
+  .section{padding:58px 0!important}
+  .section-title{margin-bottom:28px!important}
+  .section-title h2,.section-title h3{font-size:clamp(28px,8vw,38px)!important}
+  .grid-2,.grid-3,.contact-grid,.footer-grid,.about-grid{grid-template-columns:1fr!important}
+  .card{padding:22px!important}
+  .about-photo{max-width:100%!important}
+  .footer-grid{gap:25px!important}
+  .social{flex-wrap:wrap}
+  .whatsapp{width:52px!important;height:52px!important;right:16px!important;bottom:16px!important}
+}
+
+/* Black section background update */
+.section-soft,.section-cream,.page-hero{background:#000!important;color:#fff}
+.page-hero h1,.page-hero h2,.page-hero h3{color:#fff!important}
+.page-hero p,.section-soft p,.section-cream p{color:#d8d0d7!important}
+.section-soft .section-title h2,.section-soft .section-title h3,
+.section-cream .section-title h2,.section-cream .section-title h3{color:#fff!important}
+</style></head><body><header><div class="container nav">
 <a class="logo" href="index.html">Digital Project Management Services</a>
 <nav class="navlinks">
 <a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">Projects</a><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
 <a class="btn btn-primary" href="https://calendly.com/ugochinyere" target="_blank">Book a Consultation</a>
-</nav><button class="menu">☰</button></div></header><main><section class="page-hero"><div class="container"><h2 class="kicker">Blog</h2><h1>Digital Project Management, SEO & Website Insights</h1><p>Practical lessons from the digital projects I manage and the SEO and website work I do.</p></div></section>
+</nav><button class="menu" aria-label="Open menu" aria-expanded="false">☰</button></div></header><main><section class="page-hero"><div class="container"><h2 class="kicker">Blog</h2><h1>Digital Project Management, SEO & Website Insights</h1><p>Practical lessons from the digital projects I manage and the SEO and website work I do.</p></div></section>
 <section class="section"><div class="container"><div class="grid-2"><div class="card"><h2 class="kicker">Digital Project Management</h2><h3>Website Project Management</h3><p>Lessons about website projects, software projects, Agile, SDLC, stakeholder management, requirements, scope, timelines, risk management, project delivery, and team coordination.</p></div><div class="card"><h2 class="kicker">SEO & Website Growth</h2><h3>SEO and Website Visibility</h3><p>Technical SEO, On-Page SEO, Local SEO, Google Business Profile, website indexing, keyword research, GEO, AEO, website development, CRO, website audits, and website performance.</p></div></div></div></section>
 <section class="section"><div class="container"><div class="section-title"><h2>Latest Articles</h2><h3>Practical lessons from my work</h3></div><div id="dynamicPosts" class="grid-3"><p>Loading articles...</p></div></div></section>
 <section class="section section-cream"><div class="container"><div class="article"><h2>Website Development & SEO Tips</h2><p>I share practical website development and SEO tips, including lessons from projects I have worked on and things business owners should pay attention to when building and managing their online presence.</p><a class="btn btn-primary" href="#" target="_blank">Watch on YouTube</a></div></div></section></main><footer><div class="container"><div class="footer-grid">
@@ -70,4 +110,19 @@ header .brand,
 </div><p><a href="https://calendly.com/ugochinyere" target="_blank">Book a Consultation →</a></p></div>
 </div><div class="copy">© 2026 Ugochinyere Amaonyeanaso. All rights reserved.</div></div></footer>
 <a class="whatsapp" href="https://wa.me/2348103716553" target="_blank" rel="noopener" title="Chat on WhatsApp" aria-label="Chat on WhatsApp">WA</a><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script><script>
-(async()=>{const el=document.getElementById('dynamicPosts');const c=window.SUPABASE_CONFIG||{};if(!el||!c.url||!c.anonKey||c.url.includes('YOUR_')){if(el)el.innerHTML='<p>Articles will appear here.</p>';return}try{const db=supabase.createClient(c.url,c.anonKey);const {data,error}=await db.from('posts').select('id,title,excerpt,image_url,created_at').eq('published',true).order('created_at',{ascending:false});if(error)throw error;if(!data.length){el.innerHTML='<p>No articles published yet.</p>';return}el.innerHTML=data.map(p=>{const img=p.image_url&&/^https?:\/\//i.test(p.image_url)?'<img src="'+esc(p.image_url)+'" alt="'+esc(p.title)+'" loading="lazy">':'';return '<article class="post-card">'+img+'<div class="post-card-body"><div class="post-date">'+new Date(p.created_at).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'})+'</div><h3>'+esc(p.title)+'</h3><p>'+esc(p.excerpt||'')+'</p><a href="post.html?id='+encodeURIComponent(p.id)+'">Read article →</a></div></article>'}).join('')}catch(e){el.innerHTML='<p>Articles could not be loaded right now.</p>';console.error(e)}})();function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}</script></body></html>
+(async()=>{const el=document.getElementById('dynamicPosts');const c=window.SUPABASE_CONFIG||{};if(!el||!c.url||!c.anonKey||c.url.includes('YOUR_')){if(el)el.innerHTML='<p>Articles will appear here.</p>';return}try{const db=supabase.createClient(c.url,c.anonKey);const {data,error}=await db.from('posts').select('id,title,excerpt,image_url,created_at').eq('published',true).order('created_at',{ascending:false});if(error)throw error;if(!data.length){el.innerHTML='<p>No articles published yet.</p>';return}el.innerHTML=data.map(p=>{const img=p.image_url&&/^https?:\/\//i.test(String(p.image_url).trim())?'<img src="'+esc(String(p.image_url).trim())+'" alt="'+esc(p.title)+'" loading="lazy">':'';return '<article class="post-card">'+img+'<div class="post-card-body"><div class="post-date">'+new Date(p.created_at).toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'})+'</div><h3>'+esc(p.title)+'</h3><p>'+esc(p.excerpt||'')+'</p><a href="post.html?id='+encodeURIComponent(p.id)+'">Read article →</a></div></article>'}).join('')}catch(e){el.innerHTML='<p>Articles could not be loaded right now.</p>';console.error(e)}})();function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}</script>
+<script>
+(function(){
+ const btn=document.querySelector('.menu');
+ const nav=document.querySelector('.navlinks');
+ if(!btn||!nav)return;
+ btn.setAttribute('aria-expanded','false');
+ btn.addEventListener('click',function(){
+   const open=nav.classList.toggle('open');
+   btn.setAttribute('aria-expanded',open?'true':'false');
+   btn.textContent=open?'×':'☰';
+ });
+ nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.textContent='☰';}));
+})();
+</script>
+</body></html>
