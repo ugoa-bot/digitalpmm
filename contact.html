@@ -91,6 +91,72 @@ header{background:#000!important;position:sticky!important;top:0!important}
 .page-hero p,.section-soft p,.section-cream p{color:#d8d0d7!important}
 .section-soft .section-title h2,.section-soft .section-title h3,
 .section-cream .section-title h2,.section-cream .section-title h3{color:#fff!important}
+
+/* Final visual hierarchy and responsive layout */
+.section-title h2.kicker{
+  font-size:clamp(32px,4.2vw,48px)!important;
+  line-height:1.08!important;
+  color:var(--ink)!important;
+  text-transform:none!important;
+  letter-spacing:-.035em!important;
+  margin:0!important;
+}
+.section-title h3{
+  font-size:clamp(18px,2vw,24px)!important;
+  line-height:1.35!important;
+  color:#4b454b!important;
+  margin:10px 0 14px!important;
+  font-weight:600!important;
+}
+.section-title p{color:#4b454b!important}
+.section-soft,.section-cream{background:#000!important;color:#fff!important}
+.section-soft .section-title h2.kicker,.section-cream .section-title h2.kicker{color:#fff!important}
+.section-soft .section-title h3,.section-cream .section-title h3,
+.section-soft .section-title p,.section-cream .section-title p{color:#d8d0d7!important}
+
+/* Dark readable text inside white cards */
+.card h3,.card h2{color:var(--ink)!important}
+.card p,.card li{color:#302b30!important}
+.card strong{color:var(--ink)!important}
+.problem{color:#302b30!important}
+.problem strong{color:var(--ink)!important}
+
+/* Process hierarchy */
+.process-dark .section-title h2.kicker{color:#fff!important}
+.process-dark .section-title h3{color:#d8d0d7!important;font-size:clamp(18px,2vw,24px)!important}
+.process-dark .step h3{color:#fff!important}
+
+/* White CTA treatment */
+.cta{background:#fff!important;color:var(--ink)!important;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cta h2{color:var(--ink)!important;font-size:clamp(30px,4vw,48px)!important}
+.cta p{color:#4b454b!important}
+.cta .btn-light{border-color:var(--purple)!important;color:var(--purple)!important}
+.quote{background:#fff!important;color:var(--ink)!important;border:1px solid var(--line)}
+.quote h2{color:var(--ink)!important}
+.quote p{color:#4b454b!important}
+
+/* Reduce action-button visual weight */
+.section .actions .btn{padding:11px 17px;font-size:14px}
+
+/* Mobile: clean single-column sections and process */
+@media(max-width:850px){
+  .section{padding:58px 0!important}
+  .section-title{margin-bottom:28px!important}
+  .section-title h2.kicker{font-size:32px!important}
+  .section-title h3{font-size:18px!important}
+  .grid-2,.grid-3{grid-template-columns:1fr!important;gap:16px!important}
+  .card{padding:22px!important}
+  .problem{padding:20px!important}
+  .process{display:block!important}
+  .step{padding:22px 8px 22px 58px!important}
+  .case-body{padding:22px!important}
+  .case h3{font-size:22px!important}
+  .cta{padding:55px 0!important}
+  .cta h2{font-size:32px!important}
+  .quote{padding:25px!important}
+  .section .actions{display:flex!important;flex-direction:column!important;align-items:stretch!important}
+  .section .actions .btn{width:100%!important}
+}
 </style></head><body><header><div class="container nav">
 <a class="logo" href="index.html">Digital Project Management Services</a>
 <nav class="navlinks">

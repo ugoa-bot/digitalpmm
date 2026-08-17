@@ -91,6 +91,72 @@ header{background:#000!important;position:sticky!important;top:0!important}
 .page-hero p,.section-soft p,.section-cream p{color:#d8d0d7!important}
 .section-soft .section-title h2,.section-soft .section-title h3,
 .section-cream .section-title h2,.section-cream .section-title h3{color:#fff!important}
+
+/* Final visual hierarchy and responsive layout */
+.section-title h2.kicker{
+  font-size:clamp(32px,4.2vw,48px)!important;
+  line-height:1.08!important;
+  color:var(--ink)!important;
+  text-transform:none!important;
+  letter-spacing:-.035em!important;
+  margin:0!important;
+}
+.section-title h3{
+  font-size:clamp(18px,2vw,24px)!important;
+  line-height:1.35!important;
+  color:#4b454b!important;
+  margin:10px 0 14px!important;
+  font-weight:600!important;
+}
+.section-title p{color:#4b454b!important}
+.section-soft,.section-cream{background:#000!important;color:#fff!important}
+.section-soft .section-title h2.kicker,.section-cream .section-title h2.kicker{color:#fff!important}
+.section-soft .section-title h3,.section-cream .section-title h3,
+.section-soft .section-title p,.section-cream .section-title p{color:#d8d0d7!important}
+
+/* Dark readable text inside white cards */
+.card h3,.card h2{color:var(--ink)!important}
+.card p,.card li{color:#302b30!important}
+.card strong{color:var(--ink)!important}
+.problem{color:#302b30!important}
+.problem strong{color:var(--ink)!important}
+
+/* Process hierarchy */
+.process-dark .section-title h2.kicker{color:#fff!important}
+.process-dark .section-title h3{color:#d8d0d7!important;font-size:clamp(18px,2vw,24px)!important}
+.process-dark .step h3{color:#fff!important}
+
+/* White CTA treatment */
+.cta{background:#fff!important;color:var(--ink)!important;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cta h2{color:var(--ink)!important;font-size:clamp(30px,4vw,48px)!important}
+.cta p{color:#4b454b!important}
+.cta .btn-light{border-color:var(--purple)!important;color:var(--purple)!important}
+.quote{background:#fff!important;color:var(--ink)!important;border:1px solid var(--line)}
+.quote h2{color:var(--ink)!important}
+.quote p{color:#4b454b!important}
+
+/* Reduce action-button visual weight */
+.section .actions .btn{padding:11px 17px;font-size:14px}
+
+/* Mobile: clean single-column sections and process */
+@media(max-width:850px){
+  .section{padding:58px 0!important}
+  .section-title{margin-bottom:28px!important}
+  .section-title h2.kicker{font-size:32px!important}
+  .section-title h3{font-size:18px!important}
+  .grid-2,.grid-3{grid-template-columns:1fr!important;gap:16px!important}
+  .card{padding:22px!important}
+  .problem{padding:20px!important}
+  .process{display:block!important}
+  .step{padding:22px 8px 22px 58px!important}
+  .case-body{padding:22px!important}
+  .case h3{font-size:22px!important}
+  .cta{padding:55px 0!important}
+  .cta h2{font-size:32px!important}
+  .quote{padding:25px!important}
+  .section .actions{display:flex!important;flex-direction:column!important;align-items:stretch!important}
+  .section .actions .btn{width:100%!important}
+}
 </style></head><body><header><div class="container nav">
 <a class="logo" href="index.html">Digital Project Management Services</a>
 <nav class="navlinks">
@@ -102,16 +168,16 @@ header{background:#000!important;position:sticky!important;top:0!important}
 <p>I help organizations manage and deliver digital projects and help businesses build websites, improve their SEO, and become easier to find online.</p>
 <div class="actions"><a class="btn btn-primary" href="https://calendly.com/ugochinyere" target="_blank">Book a Consultation</a><a class="btn btn-light" href="projects.html">View My Projects</a></div>
 </div></section>
-<section class="section"><div class="container"><div class="section-title"><h2 class="kicker">Two ways to work with me</h2><h3>What Do You Need Help With?</h2></div><div class="grid-2">
+<section class="section"><div class="container"><div class="section-title"><h2 class="kicker">Two ways to work with me</h2><h4>What Do You Need Help With?</h4></div><div class="grid-2">
 <div class="card"><h2 class="kicker">For Organizations</h2><h3>Need someone to manage your digital project from start to finish?</h3><p>Digital projects involve developers, designers, stakeholders, requirements, deadlines, testing, and many moving parts. I coordinate the work and keep the project moving from planning through delivery.</p><p><strong>Website Projects · Software Development · Mobile App Projects · SEO Projects · Marketing Projects</strong></p><a class="btn btn-primary" href="contact.html">Hire Me as Your Digital Project Manager</a></div>
 <div class="card"><h2 class="kicker">For Businesses</h2><h3>Need help with your website, SEO, or online visibility?</h3><p>I work directly with business owners to build websites, improve search visibility, set up Google Business Profiles, and identify issues affecting their online presence.</p><p><strong>Website Development · SEO · Local SEO · Google Business Profile · GEO · AEO</strong></p><a class="btn btn-primary" href="contact.html">Get Support for Your Business</a></div>
 </div></div></section>
-<section class="section section-soft"><div class="container"><div class="section-title"><h2 class="kicker">Choose your need</h2><h3>What Do You Need Help With?</h2></div><div class="grid-3">
+<section class="section section-soft"><div class="container"><div class="section-title"><h2 class="kicker">Choose your need</h2><h4>What Do You Need Help With?</h4></div><div class="grid-3">
 <div class="card"><h3>Manage My Digital Project</h3><p>Coordinate the work, people, requirements, deadlines, and delivery.</p><a href="services.html#project-management">Digital Project Management →</a></div>
 <div class="card"><h3>Improve My Online Visibility</h3><p>Identify what is affecting your website and search visibility and work on the right improvements.</p><a href="services.html#seo">SEO & Digital Visibility →</a></div>
 <div class="card"><h3>Build My Website</h3><p>Build a professional website that communicates what you do and supports your business goals.</p><a href="services.html#website">Website Development →</a></div>
 </div></div></section>
-<section class="section"><div class="container"><div class="section-title"><h2 class="kicker">Problems I help solve</h2><h3>Your business can be good and still be difficult to find online.</h3><p>You can have great products, excellent services, and years of experience. But if people cannot find your business online, they may never discover you.</p></div><div class="grid-2">
+<section class="section"><div class="container"><div class="section-title"><h2 class="kicker">Problems I help solve</h2><h4>Your business can be good and still be difficult to find online.</h4><p>You can have great products, excellent services, and years of experience. But if people cannot find your business online, they may never discover you.</p></div><div class="grid-2">
 <div class="problem"><strong>"I have a website, but people aren't finding it."</strong>Your website may be live, but important pages may not be properly optimized or indexed.</div>
 <div class="problem"><strong>"My business isn't showing on Google."</strong>Your website or Google Business Profile may need better optimization.</div>
 <div class="problem"><strong>"I've been posting, but I'm not getting enquiries."</strong>Being active online doesn't automatically mean you're reaching the people searching for what you offer.</div>
@@ -119,7 +185,7 @@ header{background:#000!important;position:sticky!important;top:0!important}
 <div class="problem"><strong>"My website project keeps getting delayed."</strong>Unclear requirements, scope changes, missing information, poor communication, and lack of follow-up can affect project delivery.</div>
 <div class="problem"><strong>"I don't know what's wrong with my website."</strong>A proper website and SEO audit can help identify issues that aren't obvious from simply looking at the website.</div>
 </div><div class="actions"><a class="btn btn-primary" href="contact.html">Let's Discuss Your Project</a></div></div></section>
-<section class="section process-dark"><div class="container"><div class="section-title"><h2 class="kicker">My process</h2><h3>From Planning to Delivery</h3></div><div class="process">
+<section class="section process-dark"><div class="container"><div class="section-title"><h2 class="kicker">My process</h2><h4>From Planning to Delivery</h4></div><div class="process">
 <div class="step"><h3>Understand</h3><p>I understand the business, project goals, requirements, stakeholders, and expected outcome.</p></div>
 <div class="step"><h3>Plan</h3><p>I define the scope, deliverables, resources, timeline, and work breakdown.</p></div>
 <div class="step"><h3>Coordinate</h3><p>I work with developers, designers, SEO specialists, content teams, and other contributors.</p></div>
@@ -127,11 +193,11 @@ header{background:#000!important;position:sticky!important;top:0!important}
 <div class="step"><h3>Review</h3><p>I check deliverables against the agreed requirements and coordinate quality assurance before moving forward.</p></div>
 <div class="step"><h3>Deliver</h3><p>The project is completed, reviewed, handed over, and properly closed.</p></div>
 </div></div></section>
-<section class="section" id="projects-preview"><div class="container"><div class="section-title"><h2 class="kicker">Case studies</h2><h3>Some Projects I Have Delivered</h2></div><div class="grid-2">
-<div class="case"><div class="case-body"><span class="tag">Local SEO</span><span class="tag">On-Page SEO</span><span class="tag">Indexing</span><h3>Lumina Neuro-Literacy Studio</h3><p>Local SEO, Google Business Profile, website indexing, On-Page SEO, blog setup, and content optimization. The website and profile started appearing on the first page for relevant Dublin searches within about a week.</p><a href="https://lumina-literacy.ie/" target="_blank">Visit Website →</a></div></div>
-<div class="case"><div class="case-body"><span class="tag">Website Development</span><span class="tag">Technical SEO</span><span class="tag">Local SEO</span><h3>PHS Interiors</h3><p>Website development, technical SEO, service presentation, showcasing work, Local SEO, and Google Business Profile setup.</p><a href="https://www.phsinteriors.com/" target="_blank">Visit Website →</a></div></div>
+<section class="section" id="projects-preview"><div class="container"><div class="section-title"><h2 class="kicker">Case studies</h2><h4>Some Projects I Have Delivered</h4></div><div class="grid-2">
+<div class="case"><div class="case-body"><span class="tag">Local SEO</span><span class="tag">On-Page SEO</span><span class="tag">Indexing</span><h3>Lumina Neuro-Literacy Studio</h3><p>Local SEO, Google Business Profile, website indexing, On-Page SEO, blog setup, and content optimization. The website and profile started appearing on the first page for relevant Dublin searches within about a week.</p><a href="https://lumina-literacy.ie/" target="_blank">Read More →</a></div></div>
+<div class="case"><div class="case-body"><span class="tag">Website Development</span><span class="tag">Technical SEO</span><span class="tag">Local SEO</span><h3>PHS Interiors</h3><p>Website development, technical SEO, service presentation, showcasing work, Local SEO, and Google Business Profile setup.</p><a href="https://www.phsinteriors.com/" target="_blank">Read More →</a></div></div>
 </div><div class="actions"><a class="btn btn-outline" href="projects.html">View All Projects</a></div></div></section>
-<section class="section section-soft"><div class="container"><div class="section-title"><h2 class="kicker">From the blog</h2><h3>Website Development & SEO Tips</h3><p>Practical lessons and tips from the work I do.</p></div><div class="actions"><a class="btn btn-primary" href="blog.html">Read the Blog</a><a class="btn btn-outline" href="#" target="_blank">Watch Website & SEO Tips on YouTube</a></div></div></section>
+<section class="section section-soft"><div class="container"><div class="section-title"><h2 class="kicker">From the blog</h2><h4>Website Development & SEO Tips</h4><p>Practical lessons and tips from the work I do.</p></div><div class="actions"><a class="btn btn-primary" href="blog.html">Read the Blog</a><a class="btn btn-outline" href="#" aria-label="Website and SEO tips on YouTube">Website & SEO Tips on YouTube</a></div></div></section>
 <section class="cta"><div class="container"><h2>Have a digital project or online visibility problem?</h2><p>Tell me what you're working on, what you're trying to achieve, and where you need support.</p><div class="actions"><a class="btn btn-primary" href="https://calendly.com/ugochinyere" target="_blank">Book a Consultation</a><a class="btn btn-light" href="contact.html">Contact Me</a></div></div></section></main><footer><div class="container"><div class="footer-grid">
 <div><div class="footer-logo">Digital Project Management Services</div><p>I help organizations manage digital projects and help businesses build, improve, and grow their online presence.</p></div>
 <div><h4>Quick Links</h4><p><a href="index.html">Home</a></p><p><a href="services.html">Services</a></p><p><a href="projects.html">Projects</a></p><p><a href="about.html">About</a></p><p><a href="blog.html">Blog</a></p><p><a href="contact.html">Contact</a></p></div>
