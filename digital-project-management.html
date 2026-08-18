@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0" name="viewport"/><meta content="Meet Ugochinyere Amaonyeanaso, a Digital Project Manager and Consultant working across digital projects, website development, SEO, business operations, and digital systems." name="description"/><title>About Ugochinyere | Digital Project Manager &amp; Consultant</title><style>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1.0" name="viewport"/><meta content="I help organizations plan, coordinate, and manage digital projects from initiation through delivery, keeping teams, stakeholders, timelines, requirements, and deliverables aligned." name="description"/><title>Digital Project Management Services | Ugochinyere</title><style>
 :root{--pink:#b2227a;--cream:#fdf4e2;--purple:#4a1354;--ink:#171217;--muted:#665f66;--white:#fff;--line:#eadfe7;--soft:#fff8fb}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Poppins,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.65}a{text-decoration:none;color:inherit}
 .container{width:min(1140px,92%);margin:auto}
@@ -101,20 +101,83 @@ header{background:#000!important;position:sticky!important;top:0!important}
 .section-soft .section-title h2,.section-soft .section-title h3,
 .section-cream .section-title h2,.section-cream .section-title h3{color:#fff!important}
 
-.about-writeup-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-.about-writeup-cta .btn-outline{border-color:#fff;color:#fff}
-.about-writeup-cta .btn-outline:hover{background:rgba(255,255,255,.1)}
-@media(max-width:850px){.about-writeup-cta{flex-direction:column}.about-writeup-cta .btn{width:100%}}
+/* Final visual hierarchy and responsive layout */
+.section-title h2.kicker{
+  font-size:clamp(32px,4.2vw,48px)!important;
+  line-height:1.08!important;
+  color:var(--ink)!important;
+  text-transform:none!important;
+  letter-spacing:-.035em!important;
+  margin:0!important;
+}
+.section-title h3{
+  font-size:clamp(18px,2vw,24px)!important;
+  line-height:1.35!important;
+  color:#4b454b!important;
+  margin:10px 0 14px!important;
+  font-weight:600!important;
+}
+.section-title p{color:#4b454b!important}
+.section-soft,.section-cream{background:#000!important;color:#fff!important}
+.section-soft .section-title h2.kicker,.section-cream .section-title h2.kicker{color:#fff!important}
+.section-soft .section-title h3,.section-cream .section-title h3,
+.section-soft .section-title p,.section-cream .section-title p{color:#d8d0d7!important}
+
+/* Dark readable text inside white cards */
+.card h3,.card h2{color:var(--ink)!important}
+.card p,.card li{color:#302b30!important}
+.card strong{color:var(--ink)!important}
+.problem{color:#302b30!important}
+.problem strong{color:var(--ink)!important}
+
+/* Process hierarchy */
+.process-dark .section-title h2.kicker{color:#fff!important}
+.process-dark .section-title h3{color:#d8d0d7!important;font-size:clamp(18px,2vw,24px)!important}
+.process-dark .step h3{color:#fff!important}
+
+/* White CTA treatment */
+.cta{background:#fff!important;color:var(--ink)!important;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cta h2{color:var(--ink)!important;font-size:clamp(30px,4vw,48px)!important}
+.cta p{color:#4b454b!important}
+.cta .btn-light{border-color:var(--purple)!important;color:var(--purple)!important}
+.quote{background:#fff!important;color:var(--ink)!important;border:1px solid var(--line)}
+.quote h2{color:var(--ink)!important}
+.quote p{color:#4b454b!important}
+
+/* Reduce action-button visual weight */
+.section .actions .btn{padding:11px 17px;font-size:14px}
+
+/* Mobile: clean single-column sections and process */
+@media(max-width:850px){
+  .section{padding:58px 0!important}
+  .section-title{margin-bottom:28px!important}
+  .section-title h2.kicker{font-size:32px!important}
+  .section-title h3{font-size:18px!important}
+  .grid-2,.grid-3{grid-template-columns:1fr!important;gap:16px!important}
+  .card{padding:22px!important}
+  .problem{padding:20px!important}
+  .process{display:block!important}
+  .step{padding:22px 8px 22px 58px!important}
+  .case-body{padding:22px!important}
+  .case h3{font-size:22px!important}
+  .cta{padding:55px 0!important}
+  .cta h2{font-size:32px!important}
+  .quote{padding:25px!important}
+  .section .actions{display:flex!important;flex-direction:column!important;align-items:stretch!important}
+  .section .actions .btn{width:100%!important}
+}
+
+/* Service copy readability */
+.service-detail p,.service-detail li,.card p,.card li,.service-copy p{color:#171217!important}
+.service-detail h3,.service-detail h4,.card h3,.card h4{color:#171217!important}
 
 img{content-visibility:auto;}
-</style><link href="https://digitalpmm.vercel.app/about.html" rel="canonical"/><meta content="About Ugochinyere | Digital Project Manager &amp; Consultant" property="og:title"/><meta content="Meet Ugochinyere Amaonyeanaso, a Digital Project Manager and Consultant working across digital projects, website development, SEO, business operations, and digital systems." property="og:description"/><meta content="website" property="og:type"/><meta content="https://digitalpmm.vercel.app/about.html" property="og:url"/><meta content="Ugochinyere Amaonyeanaso" property="og:site_name"/><meta content="summary_large_image" name="twitter:card"/><meta content="About Ugochinyere | Digital Project Manager &amp; Consultant" name="twitter:title"/><meta content="Meet Ugochinyere Amaonyeanaso, a Digital Project Manager and Consultant working across digital projects, website development, SEO, business operations, and digital systems." name="twitter:description"/><meta content="Ugochinyere Amaonyeanaso" name="author"/><script data-seo-schema="true" type="application/ld+json">{"@context": "https://schema.org", "@type": "AboutPage", "name": "About Ugochinyere Amaonyeanaso", "url": "https://digitalpmm.vercel.app/about.html", "about": {"@type": "Person", "name": "Ugochinyere Amaonyeanaso"}}</script></head><body><header><div class="container nav">
+</style><link href="https://digitalpmm.vercel.app/digital-project-management" rel="canonical"/><meta content="Digital Project Management Services | Ugochinyere" property="og:title"/><meta content="I help organizations plan, coordinate, and manage digital projects from initiation through delivery, keeping teams, stakeholders, timelines, requirements, and deliverables aligned." property="og:description"/><meta content="website" property="og:type"/><meta content="https://digitalpmm.vercel.app/digital-project-management" property="og:url"/><meta content="Ugochinyere Amaonyeanaso" property="og:site_name"/><meta content="summary_large_image" name="twitter:card"/><meta content="Digital Project Management Services | Ugochinyere" name="twitter:title"/><meta content="I help organizations plan, coordinate, and manage digital projects from initiation through delivery, keeping teams, stakeholders, timelines, requirements, and deliverables aligned." name="twitter:description"/><meta content="Ugochinyere Amaonyeanaso" name="author"/><script data-seo-schema="true" type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Digital Project Management", "url": "https://digitalpmm.vercel.app/digital-project-management", "provider": {"@type": "Person", "name": "Ugochinyere Amaonyeanaso"}}</script></head><body><header><div class="container nav">
 <a class="logo" href="index.html">Digital Project Management Services</a>
 <nav class="navlinks">
 <a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">Projects</a><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
 <a class="btn btn-primary" href="https://calendly.com/ugochinyere" target="_blank">Book a Consultation</a>
-</nav><button aria-expanded="false" aria-label="Open menu" class="menu">☰</button></div></header><main><section class="page-hero"><div class="container"><h2 class="kicker">About</h2><h1>I'm Ugochinyere, a Digital Project Manager and Consultant</h1><p>I help organizations plan, coordinate, and deliver digital projects, while helping businesses build websites and improve their online visibility through SEO.</p></div></section>
-<section class="section"><div class="container"><div class="about-grid"><img alt="Ugochinyere Amaonyeanaso" class="about-photo" src="ugo-profile.jpeg"/><div><div class="section-title"><h2 class="kicker">I'm Ugochinyere, a Digital Project Manager and Consultant</h2><p>I help organizations plan, coordinate, and deliver digital projects, while helping businesses build websites and improve their online visibility through SEO.</p><p>My experience sits at the intersection of digital project management, business operations, website development, SEO, and digital systems.</p><p>I don't just focus on completing tasks. I focus on understanding the business goal behind the project and making sure the work being delivered supports that goal.</p></div><div class="about-writeup-cta"><a class="btn btn-primary" href="contact.html">Let's Work Together</a><a class="btn btn-outline" href="https://calendly.com/ugochinyere" rel="noopener" target="_blank">Book a Consultation</a></div></div></div></div></section>
-<section class="section section-soft"><div class="container"><div class="section-title"><h2 class="kicker">How I work</h2><h3>From Planning to Delivery</h3></div><div class="process"><div class="step"><h3>Understand</h3><p>I understand the business, project goals, requirements, stakeholders, and expected outcome.</p></div><div class="step"><h3>Plan</h3><p>I define the scope, deliverables, resources, timeline, and work breakdown.</p></div><div class="step"><h3>Coordinate</h3><p>I work with developers, designers, SEO specialists, content teams, and other contributors.</p></div><div class="step"><h3>Track</h3><p>I monitor tasks, deadlines, dependencies, risks, issues, changes, and outstanding requirements.</p></div><div class="step"><h3>Review</h3><p>I check deliverables against the agreed requirements and coordinate quality assurance.</p></div><div class="step"><h3>Deliver</h3><p>The project is completed, reviewed, handed over, and properly closed.</p></div></div></div></section></main><footer><div class="container"><div class="footer-grid">
+</nav><button aria-expanded="false" aria-label="Open menu" class="menu">☰</button></div></header><main><section class="page-hero"><div class="container"><h2 class="kicker">For Organizations</h2><h1>Digital Project Management</h1><p>I help organizations plan, coordinate, and manage digital projects from initiation through delivery.</p></div></section><section class="section"><div class="container"><div class="grid-2"><div class="card"><h2>What I Manage</h2><p>Website projects, software development, mobile app projects, SEO projects, and marketing projects.</p></div><div class="card"><h2>How I Work</h2><p>Scope and requirements, stakeholder management, timeline management, team coordination, project tracking, risk and issue follow-up, change management, review, and delivery.</p></div><div class="card"><h2>Project Management Approach</h2><p>I use practical project management methods and Agile principles where they fit the project, keeping priorities visible and coordinating the people and work required for delivery.</p></div><div class="card"><h2>Need a Project Manager?</h2><p>Tell me what you are building, what needs to be delivered, and where you need support.</p><a class="btn btn-primary" href="contact.html">Contact Me</a></div></div></div></section></main><footer><div class="container"><div class="footer-grid">
 <div><div class="footer-logo">Digital Project Management Services</div><p>I help organizations manage digital projects and help businesses build, improve, and grow their online presence.</p></div>
 <div><h4>Quick Links</h4><p><a href="index.html">Home</a></p><p><a href="services.html">Services</a></p><p><a href="projects.html">Projects</a></p><p><a href="about.html">About</a></p><p><a href="blog.html">Blog</a></p><p><a href="contact.html">Contact</a></p></div>
 <div><h4>Services</h4><p><a href="digital-project-management">Digital Project Management</a></p><p><a href="website-development">Website Development</a></p><p><a href="seo">SEO</a></p><p><a href="project-management-consulting">Project Management Consulting</a></p></div>

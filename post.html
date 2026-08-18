@@ -1,10 +1,14 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Article | Ugochinyere Amaonyeanaso">
-<title>Article | Ugochinyere Amaonyeanaso</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<meta content="Digital project management, website development, SEO, and business visibility insights from Ugochinyere Amaonyeanaso." name="description"/>
+<title>Article | Ugochinyere</title>
 <style>
 :root{--pink:#b2227a;--cream:#fdf4e2;--purple:#4a1354;--ink:#171217;--muted:#665f66;--line:#eadfe7;--soft:#fff8fb}
 *{box-sizing:border-box}
@@ -49,24 +53,22 @@ h1{font-size:clamp(38px,6vw,62px);line-height:1.05;color:var(--purple);margin:12
  .article-content{font-size:17px}
 }
 </style>
-</head>
+<link href="https://digitalpmm.vercel.app/post.html" rel="canonical"/><meta content="Article | Ugochinyere" property="og:title"/><meta content="Digital project management, website development, SEO, and business visibility insights from Ugochinyere Amaonyeanaso." property="og:description"/><meta content="website" property="og:type"/><meta content="https://digitalpmm.vercel.app/post.html" property="og:url"/><meta content="Ugochinyere Amaonyeanaso" property="og:site_name"/><meta content="summary_large_image" name="twitter:card"/><meta content="Article | Ugochinyere" name="twitter:title"/><meta content="Digital project management, website development, SEO, and business visibility insights from Ugochinyere Amaonyeanaso." name="twitter:description"/><meta content="Ugochinyere Amaonyeanaso" name="author"/></head>
 <body>
 <header>
-  <div class="container nav">
-    <a class="logo" href="index.html">Digital Project Management Services</a>
-    <nav class="navlinks" id="siteNav">
-      <a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">Projects</a><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
-      <a class="btn btn-primary" href="https://calendly.com/ugochinyere" target="_blank" rel="noopener">Book a Consultation</a>
-    </nav>
-    <button class="menu" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
-  </div>
+<div class="container nav">
+<a class="logo" href="index.html">Digital Project Management Services</a>
+<nav class="navlinks" id="siteNav">
+<a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">Projects</a><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
+<a class="btn btn-primary" href="https://calendly.com/ugochinyere" rel="noopener" target="_blank">Book a Consultation</a>
+</nav>
+<button aria-expanded="false" aria-label="Open menu" class="menu" id="menuBtn">☰</button>
+</div>
 </header>
-
 <main class="wrap">
-  <a class="back" href="blog.html">← Back to Blog</a>
-  <div id="post"><p>Loading article...</p></div>
+<a class="back" href="blog.html">← Back to Blog</a>
+<div id="post"><p>Loading article...</p></div>
 </main>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
 <script src="supabase-config.js"></script>
@@ -106,7 +108,7 @@ function markdownToHtml(value){
     const db=supabase.createClient(c.url,c.anonKey);
     const now=new Date().toISOString();const {data,error}=await db.from('posts').select('*').eq('id',id).eq('published',true).or(`scheduled_at.is.null,scheduled_at.lte.${now}`).single();
     if(error||!data){target.innerHTML='<p>Article not found.</p>';return;}
-    document.title=data.title+' | Ugochinyere Amaonyeanaso';
+    document.title=data.title+' | Ugochinyere Amaonyeanaso'; let can=document.querySelector('link[rel=canonical]'); if(can) can.href=location.href; const schema=document.createElement('script'); schema.type='application/ld+json'; schema.dataset.articleSchema='true'; schema.textContent=JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':data.title,'description':data.excerpt||'', 'datePublished':data.created_at,'dateModified':data.updated_at,'url':location.href,'author':{'@type':'Person','name':'Ugochinyere Amaonyeanaso'}}); document.head.appendChild(schema);
     const validImage=typeof data.image_url==='string' && /^https?:\/\//i.test(data.image_url.trim());
     const image=validImage?'<img class="heroimg" src="'+esc(data.image_url.trim())+'" alt="'+esc(data.title)+'">':'';
     const content=DOMPurify.sanitize(markdownToHtml(data.content||''));
