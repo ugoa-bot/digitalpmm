@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="t d">
+<title id="t">Project management consulting</title><desc id="d">Project roadmap and planning board showing milestones, priorities, and delivery steps.</desc>
+<rect width="1200" height="700" fill="#f7eef5"/>
+<rect x="95" y="85" width="1010" height="530" rx="28" fill="#fff" stroke="#e4d8e2" stroke-width="4"/>
+<rect x="95" y="85" width="1010" height="75" rx="28" fill="#171217"/>
+<rect x="135" y="112" width="260" height="20" rx="10" fill="#fff" opacity=".9"/>
+<circle cx="1010" cy="122" r="12" fill="#b2227a"/>
+<line x1="185" y1="330" x2="1010" y2="330" stroke="#d7bfd2" stroke-width="12" stroke-linecap="round"/>
+<circle cx="220" cy="330" r="30" fill="#b2227a"/><circle cx="470" cy="330" r="30" fill="#b2227a"/><circle cx="720" cy="330" r="30" fill="#b2227a"/><circle cx="970" cy="330" r="30" fill="#171217"/>
+<rect x="145" y="205" width="150" height="65" rx="12" fill="#f4eaf3"/><rect x="395" y="205" width="150" height="65" rx="12" fill="#f4eaf3"/><rect x="645" y="205" width="150" height="65" rx="12" fill="#f4eaf3"/><rect x="895" y="205" width="150" height="65" rx="12" fill="#f4eaf3"/>
+<rect x="145" y="425" width="150" height="65" rx="12" fill="#171217"/><rect x="395" y="425" width="150" height="65" rx="12" fill="#171217"/><rect x="645" y="425" width="150" height="65" rx="12" fill="#171217"/><rect x="895" y="425" width="150" height="65" rx="12" fill="#b2227a"/>
+<rect x="175" y="225" width="90" height="12" rx="6" fill="#171217"/><rect x="425" y="225" width="90" height="12" rx="6" fill="#171217"/><rect x="675" y="225" width="90" height="12" rx="6" fill="#171217"/><rect x="925" y="225" width="90" height="12" rx="6" fill="#171217"/>
+<rect x="175" y="450" width="90" height="12" rx="6" fill="#fff"/><rect x="425" y="450" width="90" height="12" rx="6" fill="#fff"/><rect x="675" y="450" width="90" height="12" rx="6" fill="#fff"/><rect x="925" y="450" width="90" height="12" rx="6" fill="#fff"/>
+</svg>
