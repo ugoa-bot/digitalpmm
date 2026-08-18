@@ -1,0 +1,5 @@
+IMPORTANT
+Extract this ZIP before uploading the website to GitHub.
+Upload the contents of this folder to the ROOT of the digitalpmm repository.
+The files index.html, services.html, projects.html and the image files should be in the repository root.
+The service and project images are intentionally kept in the root so Vercel can serve them reliably.
