@@ -1,158 +1,351 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Website Admin | Ugochinyere</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — Blog CMS | Digital Project Management</title>
+<link rel="stylesheet" href="shared.css">
 <style>
-:root{--pink:#b2227a;--cream:#fdf4e2;--purple:#4a1354;--ink:#171217;--muted:#665f66;--line:#eadfe7}
-*{box-sizing:border-box}body{margin:0;font-family:Poppins,Arial,sans-serif;background:#f7f3f6;color:var(--ink)}button,input,textarea,select{font:inherit}.top{background:#000;color:#fff;padding:20px 5%;display:flex;justify-content:space-between;align-items:center}.top strong{font-size:18px}.wrap{width:min(1100px,92%);margin:35px auto}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px;margin-bottom:25px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.field{margin:14px 0}.field label{display:block;font-weight:700;font-size:13px;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;padding:12px;border:1px solid #d8ccd5;border-radius:8px}.field textarea{min-height:150px}.btn{border:0;border-radius:8px;padding:12px 18px;font-weight:700;cursor:pointer}.primary{background:var(--pink);color:#fff}.dark{background:#000;color:#fff}.danger{background:#eee;color:#a00}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.tabs button{background:#eee;color:#333}.tabs button.active{background:var(--purple);color:#fff}.hidden{display:none}.list{display:grid;gap:12px}.item{border:1px solid var(--line);padding:16px;border-radius:10px;display:flex;justify-content:space-between;gap:15px;align-items:center}.item small{color:var(--muted)}#status{margin:10px 0;font-weight:700}.thumb{width:80px;height:55px;object-fit:cover;border-radius:6px}@media(max-width:750px){.grid{grid-template-columns:1fr}.top{align-items:flex-start;gap:15px;flex-direction:column}.item{align-items:flex-start;flex-direction:column}}
+  body{background:var(--paper-dim);}
+  .admin-wrap{max-width:820px;margin:0 auto;padding:50px 24px 80px;}
+  .admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;}
+  .admin-header h1{font-size:24px;}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:32px;margin-bottom:24px;}
 
-/* Full black site header */
-header,
-.site-header,
-.nav-wrap,
-.navbar,
-nav {
-  background: #000 !important;
-  color: #fff !important;
-}
-header::before,
-header::after,
-.site-header::before,
-.site-header::after {
-  background: #000 !important;
-}
-header a,
-.site-header a,
-.nav-wrap a,
-.navbar a,
-nav a {
-  color: #fff !important;
-}
-header .logo,
-header .brand,
-.site-header .logo,
-.site-header .brand {
-  color: #fff !important;
-}
-
-
-.editor-toolbar{display:flex;gap:6px;flex-wrap:wrap;padding:10px;background:#f4eef3;border:1px solid #d8ccd5;border-bottom:0;border-radius:8px 8px 0 0}
-.editor-toolbar button{border:1px solid #d8ccd5;background:#fff;border-radius:6px;padding:7px 11px;cursor:pointer}
-.editor-toolbar button:hover{background:#fdf4e2}
-.rich-editor{min-height:360px;width:100%;padding:18px;border:1px solid #d8ccd5;border-radius:0 0 8px 8px;background:#fff;line-height:1.7;outline:none}
-.rich-editor:empty:before{content:attr(data-placeholder);color:#999}
-.rich-editor h2,.rich-editor h3{color:#4a1354;margin:24px 0 10px}
-.rich-editor p{margin:0 0 16px}.rich-editor ul{padding-left:24px}
-
-.post-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.post-actions .btn{cursor:pointer}
-.hidden{display:none!important}
-.post-status{font-weight:700}
-</style></head><body>
-<div class="top"><strong>Ugochinyere Website Admin</strong><button id="logout" class="btn dark">Log out</button></div>
-<div class="wrap">
-<div id="login" class="panel"><h1>Admin Login</h1><p>Sign in to manage blog posts, services and case studies.</p><div class="field"><label>Email</label><input id="email" type="email"></div><div class="field"><label>Password</label><input id="password" type="password"></div><button id="loginBtn" class="btn primary">Sign in</button><div id="loginStatus"></div></div>
-<div id="dashboard" class="hidden">
-<div id="status"></div>
-<div class="tabs"><button class="btn active" data-tab="posts">Blog Posts</button><button class="btn" data-tab="services">Services</button><button class="btn" data-tab="cases">Case Studies</button></div>
-
-<section id="posts" class="panel tab"><h2>Create / Edit Blog Post</h2><input type="hidden" id="postId"><div class="grid">
-<div><div class="field"><label>Title</label><input id="postTitle"></div><div class="field"><label>Slug</label><input id="postSlug"></div><div class="field"><label>Excerpt</label><textarea id="postExcerpt"></textarea></div><div class="field">
-<label>Content</label>
-<div class="editor-toolbar">
-  <button type="button" data-cmd="formatBlock" data-val="h2">H2</button>
-  <button type="button" data-cmd="formatBlock" data-val="h3">H3</button>
-  <button type="button" data-cmd="bold"><strong>B</strong></button>
-  <button type="button" data-cmd="italic"><em>I</em></button>
-  <button type="button" data-cmd="insertUnorderedList">• List</button>
-  <button type="button" data-cmd="createLink">Link</button>
-  <button type="button" data-cmd="removeFormat">Clear</button>
-</div>
-<div id="postContentEditor" class="rich-editor" contenteditable="true" data-placeholder="Write your article here..."></div>
-<textarea id="postContent" hidden></textarea>
-</div></div>
-<div>
-<div class="field"><label>Featured image</label><input id="postImage" type="file" accept="image/*"><small>Upload an image or use an image URL.</small></div>
-<div class="field"><label>Image URL</label><input id="postImageUrl"></div>
-<div class="field"><label>Publication status</label><select id="postStatus"><option value="draft">Save as Draft</option><option value="published">Publish Immediately</option><option value="scheduled">Schedule Post</option></select></div>
-<div class="field hidden" id="scheduleField"><label>Schedule date & time</label><input id="postScheduledAt" type="datetime-local"></div>
-<div class="post-actions"><button id="saveDraft" class="btn">Save Draft</button><button id="publishPost" class="btn primary">Publish Post</button><button id="schedulePost" class="btn">Schedule Post</button><button id="clearPost" class="btn">Clear</button></div>
-</div></div><hr><h3>Existing posts</h3><div id="postList" class="list"></div></section>
-
-<section id="services" class="panel tab hidden"><h2>Create / Edit Service</h2><input type="hidden" id="serviceId"><div class="grid">
-<div><div class="field"><label>Service title</label><input id="serviceTitle"></div><div class="field"><label>Short description</label><textarea id="serviceDescription"></textarea></div><div class="field"><label>Full content</label><textarea id="serviceContent"></textarea></div></div>
-<div><div class="field"><label>Service image</label><input id="serviceImage" type="file" accept="image/*"></div><div class="field"><label>Image URL</label><input id="serviceImageUrl"></div><div class="field"><label>Published</label><select id="servicePublished"><option value="true">Yes</option><option value="false">No</option></select></div><button id="saveService" class="btn primary">Save Service</button><button id="clearService" class="btn">Clear</button></div></div><hr><h3>Existing services</h3><div id="serviceList" class="list"></div></section>
-
-<section id="cases" class="panel tab hidden"><h2>Create / Edit Case Study</h2><input type="hidden" id="caseId"><div class="grid">
-<div><div class="field"><label>Project title</label><input id="caseTitle"></div><div class="field"><label>Category</label><input id="caseCategory"></div><div class="field"><label>Description</label><textarea id="caseDescription"></textarea></div><div class="field"><label>Result</label><textarea id="caseResult"></textarea></div></div>
-<div><div class="field"><label>Project URL</label><input id="caseUrl"></div><div class="field"><label>Project image</label><input id="caseImage" type="file" accept="image/*"></div><div class="field"><label>Image URL</label><input id="caseImageUrl"></div><div class="field"><label>Published</label><select id="casePublished"><option value="true">Yes</option><option value="false">No</option></select></div><button id="saveCase" class="btn primary">Save Case Study</button><button id="clearCase" class="btn">Clear</button></div></div><hr><h3>Existing case studies</h3><div id="caseList" class="list"></div></section>
-</div></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
-<script>
-const cfg=window.SUPABASE_CONFIG||{};
-const ready=cfg.url&&cfg.anonKey&&!cfg.url.includes('YOUR_');
-const db=ready?window.supabase.createClient(cfg.url,cfg.anonKey):null;
-const $=id=>document.getElementById(id);
-function msg(t,error=false){$('status').textContent=t;$('status').style.color=error?'#a00':'#4a1354'}
-function loginMsg(t){$('loginStatus').textContent=t}
-async function check(){if(!db){loginMsg('Add your Supabase URL and anon key to supabase-config.js first.');return}const {data}=await db.auth.getSession();show(!!data.session)}
-function show(ok){$('login').classList.toggle('hidden',ok);$('dashboard').classList.toggle('hidden',!ok);if(ok){loadAll()}}
-$('loginBtn').onclick=async()=>{if(!db)return;const {error}=await db.auth.signInWithPassword({email:$('email').value,password:$('password').value});if(error)loginMsg(error.message);else show(true)}
-$('logout').onclick=async()=>{if(db)await db.auth.signOut();show(false)}
-document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.tab').forEach(x=>x.classList.add('hidden'));$(b.dataset.tab).classList.remove('hidden')});
-function slugify(s){return s.toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'')}
-async function upload(file){if(!file)return '';const path=`${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g,'-')}`;const {error}=await db.storage.from('site-media').upload(path,file);if(error)throw error;return db.storage.from('site-media').getPublicUrl(path).data.publicUrl}
-async function loadAll(){await load('posts','postList','post');await load('services','serviceList','service');await load('case_studies','caseList','case')}
-async function load(table,target,prefix){
- const {data,error}=await db.from(table).select('*').order('created_at',{ascending:false});
- if(error){msg(error.message,true);return}
- $(target).innerHTML=data.map(x=>{
-   let state=x.published?'Published':'Draft';
-   if(x.scheduled_at && !x.published && new Date(x.scheduled_at)>new Date()) state='Scheduled for '+new Date(x.scheduled_at).toLocaleString();
-   return `<div class="item"><div>${x.image_url?`<img class="thumb" src="${esc(x.image_url)}">`:''}<strong>${esc(x.title)}</strong><br><small>${esc(state)}</small></div><div><button class="btn" onclick='edit${cap(prefix)}(${JSON.stringify(x)})'>Edit</button> <button class="btn danger" onclick='del("${table}","${x.id}")'>Delete</button></div></div>`
- }).join('')||'<small>No entries yet.</small>'
-}
-function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
-function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-async function del(table,id){if(!confirm('Delete this item?'))return;const {error}=await db.from(table).delete().eq('id',id);if(error)msg(error.message,true);else{msg('Deleted.');loadAll()}}
-window.editPost=x=>{
- $('postId').value=x.id;$('postTitle').value=x.title;$('postSlug').value=x.slug;$('postExcerpt').value=x.excerpt||'';$('postContent').value=x.content||'';
- $('postContentEditor').innerHTML=x.content&&/<\/?[a-z][\s\S]*>/i.test(x.content)?x.content:String(x.content||'').split(/\n\s*\n/).map(v=>'<p>'+esc(v).replace(/\n/g,'<br>')+'</p>').join('');
- $('postImageUrl').value=x.image_url||'';
- if(x.scheduled_at && !x.published){$('postStatus').value='scheduled';$('postScheduledAt').value=toLocalInput(x.scheduled_at)}else{$('postStatus').value=x.published?'published':'draft';$('postScheduledAt').value='';}
- toggleSchedule();
-}
-window.editService=x=>{$('serviceId').value=x.id;$('serviceTitle').value=x.title;$('serviceDescription').value=x.description||'';$('serviceContent').value=x.content||'';$('serviceImageUrl').value=x.image_url||'';$('servicePublished').value=x.published?'true':'false'}
-window.editCase=x=>{$('caseId').value=x.id;$('caseTitle').value=x.title;$('caseCategory').value=x.category||'';$('caseDescription').value=x.description||'';$('caseResult').value=x.result||'';$('caseUrl').value=x.url||'';$('caseImageUrl').value=x.image_url||'';$('casePublished').value=x.published?'true':'false'}
-function toLocalInput(v){const d=new Date(v);const pad=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`}
-function toggleSchedule(){const show=$('postStatus').value==='scheduled';$('scheduleField').classList.toggle('hidden',!show);$('schedulePost').classList.toggle('hidden',!show)}
-$('postStatus').onchange=toggleSchedule;
-async function savePostWithStatus(status){
- try{
-  let image=$('postImageUrl').value||await upload($('postImage').files[0]);
-  let scheduledAt=null,published=false;
-  if(status==='published'){published=true}
-  if(status==='scheduled'){
-    if(!$('postScheduledAt').value) throw new Error('Choose a date and time for the scheduled post.');
-    const chosen=new Date($('postScheduledAt').value);
-    if(chosen<=new Date()) throw new Error('The scheduled time must be in the future.');
-    scheduledAt=chosen.toISOString();
+  #loginView{max-width:400px;margin:80px auto;}
+  #loginView h1{font-size:22px;margin-bottom:6px;}
+  #loginView p{color:var(--muted);font-size:14px;margin-bottom:24px;}
+  label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;margin-top:14px;}
+  input,select,textarea{
+    width:100%;padding:11px 13px;border-radius:9px;
+    border:1px solid var(--line);font-family:inherit;font-size:14px;
+    background:var(--white);
   }
-  const row={title:$('postTitle').value,slug:$('postSlug').value||slugify($('postTitle').value),excerpt:$('postExcerpt').value,content:$('postContentEditor').innerHTML,image_url:image,published,scheduled_at:scheduledAt,updated_at:new Date().toISOString()};
-  if(!row.title||!row.content)throw new Error('Add a title and article content before publishing.');
-  const id=$('postId').value;
-  const q=id?db.from('posts').update(row).eq('id',id):db.from('posts').insert(row);
-  const {error}=await q;if(error)throw error;
-  msg(status==='published'?'Post published.':status==='scheduled'?'Post scheduled.':'Draft saved.');
-  clearPost();loadAll();
- }catch(e){msg(e.message,true)}
-}
-$('saveDraft').onclick=()=>savePostWithStatus('draft');
-$('publishPost').onclick=()=>savePostWithStatus('published');
-$('schedulePost').onclick=()=>savePostWithStatus('scheduled');
-$('saveService').onclick=async()=>{try{let image=$('serviceImageUrl').value||await upload($('serviceImage').files[0]);const row={title:$('serviceTitle').value,description:$('serviceDescription').value,content:$('serviceContent').value,image_url:image,published:$('servicePublished').value==='true',updated_at:new Date().toISOString()};const id=$('serviceId').value;const q=id?db.from('services').update(row).eq('id',id):db.from('services').insert(row);const {error}=await q;if(error)throw error;msg('Service saved.');clearService();loadAll()}catch(e){msg(e.message,true)}}
-$('saveCase').onclick=async()=>{try{let image=$('caseImageUrl').value||await upload($('caseImage').files[0]);const row={title:$('caseTitle').value,category:$('caseCategory').value,description:$('caseDescription').value,result:$('caseResult').value,url:$('caseUrl').value,image_url:image,published:$('casePublished').value==='true',updated_at:new Date().toISOString()};const id=$('caseId').value;const q=id?db.from('case_studies').update(row).eq('id',id):db.from('case_studies').insert(row);const {error}=await q;if(error)throw error;msg('Case study saved.');clearCase();loadAll()}catch(e){msg(e.message,true)}}
-function clearPost(){$('postId').value='';['postTitle','postSlug','postExcerpt','postContent','postImageUrl','postScheduledAt'].forEach(x=>$(x).value='');$('postContentEditor').innerHTML='';$('postStatus').value='draft';toggleSchedule();}
-function clearService(){$('serviceId').value='';['serviceTitle','serviceDescription','serviceContent','serviceImageUrl'].forEach(x=>$(x).value='');$('servicePublished').value='true'}
-function clearCase(){$('caseId').value='';['caseTitle','caseCategory','caseDescription','caseResult','caseUrl','caseImageUrl'].forEach(x=>$(x).value='');$('casePublished').value='true'}
-$('clearPost').onclick=clearPost;$('clearService').onclick=clearService;$('clearCase').onclick=clearCase;
-check();
-</script></body></html>
+  textarea{min-height:160px;resize:vertical;font-family:'Courier New',monospace;font-size:13.5px;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:600px){ .row2{grid-template-columns:1fr;} }
+
+  .post-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:14px 0;border-bottom:1px solid var(--line);gap:12px;
+  }
+  .post-row:last-child{border-bottom:none;}
+  .post-row-title{font-weight:700;font-size:14.5px;}
+  .post-row-meta{font-size:12px;color:var(--muted);margin-top:2px;}
+  .status-pill{font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:0.4px;}
+  .status-published{background:#e2f5e9;color:#1c7d43;}
+  .status-scheduled{background:#fdf0d5;color:#a3730a;}
+  .status-draft{background:#eee;color:#666;}
+  .row-actions{display:flex;gap:8px;flex-shrink:0;}
+  .row-actions button{font-size:12.5px;font-weight:700;padding:7px 12px;border-radius:8px;background:var(--paper-dim);}
+  .row-actions .danger{color:#b0243c;}
+
+  .img-preview{width:100%;max-height:180px;object-fit:cover;border-radius:10px;margin-top:10px;display:none;}
+  .msg{font-size:13.5px;padding:10px 14px;border-radius:9px;margin-top:12px;display:none;}
+  .msg.error{background:#fde5ea;color:#a3143a;}
+  .msg.success{background:#e2f5e9;color:#1c7d43;}
+  .hint{font-size:12px;color:var(--muted);margin-top:6px;}
+</style>
+</head>
+<body>
+
+<div id="loginView">
+  <div class="card">
+    <h1>Blog Admin Login</h1>
+    <p>Log in with the account you created in Supabase Authentication.</p>
+    <label>Email</label>
+    <input type="email" id="loginEmail" autocomplete="username">
+    <label>Password</label>
+    <input type="password" id="loginPassword" autocomplete="current-password">
+    <button class="btn btn-primary btn-block" style="margin-top:20px;" onclick="login()">Log In</button>
+    <div class="msg error" id="loginMsg"></div>
+  </div>
+</div>
+
+<div id="adminView" class="admin-wrap" style="display:none;">
+  <div class="admin-header">
+    <h1>Blog Admin</h1>
+    <button class="btn btn-outline" onclick="logout()">Log Out</button>
+  </div>
+
+  <div class="card">
+    <h3 id="formTitle" style="font-size:17px;margin-bottom:4px;">New Post</h3>
+    <p style="color:var(--muted);font-size:13.5px;margin-bottom:6px;">Fill in the details below, then publish now or schedule for later.</p>
+
+    <label>Title *</label>
+    <input id="fTitle" oninput="autoSlug()">
+
+    <label>URL Slug</label>
+    <input id="fSlug">
+    <div class="hint">Used in the post's link. Auto-generated from the title — edit if you want a custom one.</div>
+
+    <label>Category</label>
+    <input id="fCategory" placeholder="e.g. SEO, Website Project Management">
+
+    <label>Excerpt</label>
+    <textarea id="fExcerpt" style="min-height:70px;font-family:inherit;"></textarea>
+
+    <label>Content *</label>
+    <textarea id="fContent" placeholder="Write your post here. Line breaks are preserved."></textarea>
+
+    <label>Blog Image</label>
+    <input type="file" id="fImageFile" accept="image/*" onchange="previewImage()">
+    <img id="imgPreview" class="img-preview">
+    <input type="hidden" id="fImageUrl">
+
+    <div class="row2" style="margin-top:16px;">
+      <div>
+        <label>Status</label>
+        <select id="fPublished">
+          <option value="false">Draft</option>
+          <option value="true">Published</option>
+        </select>
+      </div>
+      <div>
+        <label>Schedule For (optional)</label>
+        <input type="datetime-local" id="fScheduledAt">
+        <div class="hint">Leave blank to publish immediately when status is "Published".</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;margin-top:22px;">
+      <button class="btn btn-primary" onclick="savePost()">Save Post</button>
+      <button class="btn btn-outline" id="cancelEditBtn" style="display:none;" onclick="resetForm()">Cancel Edit</button>
+    </div>
+    <div class="msg" id="formMsg"></div>
+  </div>
+
+  <div class="card">
+    <h3 style="font-size:17px;margin-bottom:14px;">All Posts</h3>
+    <div id="postsList">Loading…</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+  const cfg = window.SUPABASE_CONFIG || {};
+  const db = supabase.createClient(cfg.url, cfg.anonKey);
+  let editingId = null;
+  let allPosts = [];
+
+  function esc(v){
+    return String(v ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+  }
+
+  function slugify(str){
+    return str.toLowerCase().trim()
+      .replace(/[^a-z0-9\s-]/g,"")
+      .replace(/\s+/g,"-")
+      .replace(/-+/g,"-");
+  }
+
+  function autoSlug(){
+    const title = document.getElementById("fTitle").value;
+    const slugField = document.getElementById("fSlug");
+    if(!editingId || slugField.dataset.auto !== "false"){
+      slugField.value = slugify(title);
+      slugField.dataset.auto = "true";
+    }
+  }
+  document.getElementById("fSlug").addEventListener("input", () => {
+    document.getElementById("fSlug").dataset.auto = "false";
+  });
+
+  function previewImage(){
+    const file = document.getElementById("fImageFile").files[0];
+    if(!file) return;
+    const preview = document.getElementById("imgPreview");
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
+  }
+
+  async function checkSession(){
+    const { data } = await db.auth.getSession();
+    if(data.session){
+      showAdmin();
+    } else {
+      document.getElementById("loginView").style.display = "block";
+      document.getElementById("adminView").style.display = "none";
+    }
+  }
+
+  async function login(){
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    const msg = document.getElementById("loginMsg");
+    msg.style.display = "none";
+    const { error } = await db.auth.signInWithPassword({ email, password });
+    if(error){
+      msg.textContent = error.message;
+      msg.style.display = "block";
+      return;
+    }
+    showAdmin();
+  }
+
+  async function logout(){
+    await db.auth.signOut();
+    location.reload();
+  }
+
+  function showAdmin(){
+    document.getElementById("loginView").style.display = "none";
+    document.getElementById("adminView").style.display = "block";
+    loadPosts();
+  }
+
+  async function loadPosts(){
+    const listEl = document.getElementById("postsList");
+    const { data, error } = await db.from("posts").select("*").order("created_at", { ascending: false });
+    if(error){
+      listEl.innerHTML = `<p style="color:#a3143a;">Could not load posts: ${esc(error.message)}</p>`;
+      return;
+    }
+    allPosts = data;
+    if(!data.length){
+      listEl.innerHTML = `<p style="color:var(--muted);">No posts yet. Create your first one above.</p>`;
+      return;
+    }
+    listEl.innerHTML = data.map(p => {
+      let status = "draft", label = "Draft";
+      if(p.published){
+        if(p.scheduled_at && new Date(p.scheduled_at) > new Date()){
+          status = "scheduled"; label = "Scheduled";
+        } else {
+          status = "published"; label = "Published";
+        }
+      }
+      return `
+        <div class="post-row">
+          <div>
+            <div class="post-row-title">${esc(p.title)}</div>
+            <div class="post-row-meta">
+              <span class="status-pill status-${status}">${label}</span>
+              ${p.scheduled_at ? " · " + new Date(p.scheduled_at).toLocaleString() : ""}
+            </div>
+          </div>
+          <div class="row-actions">
+            <button onclick="editPost('${p.id}')">Edit</button>
+            <button class="danger" onclick="deletePost('${p.id}')">Delete</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function editPost(id){
+    const p = allPosts.find(x => x.id === id);
+    if(!p) return;
+    editingId = id;
+    document.getElementById("formTitle").textContent = "Edit Post";
+    document.getElementById("fTitle").value = p.title || "";
+    document.getElementById("fSlug").value = p.slug || "";
+    document.getElementById("fSlug").dataset.auto = "false";
+    document.getElementById("fCategory").value = p.category || "";
+    document.getElementById("fExcerpt").value = p.excerpt || "";
+    document.getElementById("fContent").value = p.content || "";
+    document.getElementById("fImageUrl").value = p.image_url || "";
+    if(p.image_url){
+      document.getElementById("imgPreview").src = p.image_url;
+      document.getElementById("imgPreview").style.display = "block";
+    }
+    document.getElementById("fPublished").value = String(!!p.published);
+    document.getElementById("fScheduledAt").value = p.scheduled_at ? p.scheduled_at.slice(0,16) : "";
+    document.getElementById("cancelEditBtn").style.display = "inline-flex";
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  function resetForm(){
+    editingId = null;
+    document.getElementById("formTitle").textContent = "New Post";
+    document.getElementById("fTitle").value = "";
+    document.getElementById("fSlug").value = "";
+    document.getElementById("fSlug").dataset.auto = "true";
+    document.getElementById("fCategory").value = "";
+    document.getElementById("fExcerpt").value = "";
+    document.getElementById("fContent").value = "";
+    document.getElementById("fImageUrl").value = "";
+    document.getElementById("fImageFile").value = "";
+    document.getElementById("imgPreview").style.display = "none";
+    document.getElementById("fPublished").value = "false";
+    document.getElementById("fScheduledAt").value = "";
+    document.getElementById("cancelEditBtn").style.display = "none";
+  }
+
+  async function deletePost(id){
+    if(!confirm("Delete this post? This can't be undone.")) return;
+    const { error } = await db.from("posts").delete().eq("id", id);
+    if(error){ alert("Error deleting: " + error.message); return; }
+    loadPosts();
+  }
+
+  async function savePost(){
+    const msg = document.getElementById("formMsg");
+    msg.style.display = "none";
+    msg.className = "msg";
+
+    const title = document.getElementById("fTitle").value.trim();
+    const content = document.getElementById("fContent").value.trim();
+    if(!title || !content){
+      msg.textContent = "Title and content are required.";
+      msg.className = "msg error";
+      msg.style.display = "block";
+      return;
+    }
+
+    let imageUrl = document.getElementById("fImageUrl").value || null;
+    const file = document.getElementById("fImageFile").files[0];
+
+    if(file){
+      const ext = file.name.split(".").pop();
+      const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+      const { error: uploadError } = await db.storage.from("blog-images").upload(path, file);
+      if(uploadError){
+        msg.textContent = "Image upload failed: " + uploadError.message;
+        msg.className = "msg error";
+        msg.style.display = "block";
+        return;
+      }
+      const { data: pub } = db.storage.from("blog-images").getPublicUrl(path);
+      imageUrl = pub.publicUrl;
+    }
+
+    const scheduledVal = document.getElementById("fScheduledAt").value;
+    const payload = {
+      title,
+      slug: document.getElementById("fSlug").value.trim() || slugify(title),
+      category: document.getElementById("fCategory").value.trim() || null,
+      excerpt: document.getElementById("fExcerpt").value.trim() || null,
+      content,
+      image_url: imageUrl,
+      published: document.getElementById("fPublished").value === "true",
+      scheduled_at: scheduledVal ? new Date(scheduledVal).toISOString() : null
+    };
+
+    let error;
+    if(editingId){
+      ({ error } = await db.from("posts").update(payload).eq("id", editingId));
+    } else {
+      ({ error } = await db.from("posts").insert(payload));
+    }
+
+    if(error){
+      msg.textContent = "Error saving: " + error.message;
+      msg.className = "msg error";
+      msg.style.display = "block";
+      return;
+    }
+
+    msg.textContent = "Saved.";
+    msg.className = "msg success";
+    msg.style.display = "block";
+    resetForm();
+    loadPosts();
+  }
+
+  checkSession();
+</script>
+</body>
+</html>

@@ -3,8 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Digital Project Management, SEO, and Website insights from Ugochinyere Amaonyeanaso.">
-<title>Blog | Ugochinyere Amaonyeanaso</title>
+<meta name="description" content="Practical lessons on digital project management, website development, and SEO from real client projects, written by Ugochinyere Amaonyeanaso.">
+<link rel="canonical" href="https://digitalpmm.vercel.app/blog.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog — Digital Project Management & SEO Insights | Ugochinyere Amaonyeanaso">
+<meta property="og:description" content="Practical lessons on digital project management, website development, and SEO from real client projects, written by Ugochinyere Amaonyeanaso.">
+<meta property="og:url" content="https://digitalpmm.vercel.app/blog.html">
+<meta property="og:site_name" content="Ugochinyere Amaonyeanaso — Digital Project Management">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Blog — Digital Project Management & SEO Insights | Ugochinyere Amaonyeanaso">
+<meta name="twitter:description" content="Practical lessons on digital project management, website development, and SEO from real client projects, written by Ugochinyere Amaonyeanaso.">
+<meta name="robots" content="index, follow">
+<title>Blog — Digital Project Management & SEO Insights | Ugochinyere Amaonyeanaso</title>
 <link rel="stylesheet" href="shared.css">
 <style>
   .page-hero{
@@ -50,7 +60,7 @@
 
 <nav class="site-nav">
   <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;height:78px;">
-    <a href="index.html" class="brand"><span class="dot"></span>Digital PMM</a>
+    <a href="index.html" class="brand"><span class="dot"></span>Digital Project Management</a>
     <div class="navlinks">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
@@ -83,49 +93,8 @@
       <h2>Practical Lessons From My Work</h2>
     </div>
 
-    <div class="post-grid" style="margin-top:40px;">
-      <div class="pcard post-card">
-        <div class="pcard-tags"><span class="tag tag-violet">PM</span></div>
-        <div class="post-date">Website Project Management</div>
-        <h3>Why Website Projects Fall Behind Schedule</h3>
-        <p>Unclear requirements, scope changes, and missing information are the most common reasons website projects slip. Here's how I plan around them from day one.</p>
-        <div class="post-read">Read article →</div>
-      </div>
-      <div class="pcard post-card">
-        <div class="pcard-tags"><span class="tag tag-teal">SEO</span></div>
-        <div class="post-date">SEO & Website Growth</div>
-        <h3>Your Website Can Be Live and Still Be Invisible</h3>
-        <p>A published website isn't the same as an indexed, optimized one. What to check first when your site isn't showing up in search.</p>
-        <div class="post-read">Read article →</div>
-      </div>
-      <div class="pcard post-card">
-        <div class="pcard-tags"><span class="tag tag-coral">PM</span></div>
-        <div class="post-date">Website & Software Project Management</div>
-        <h3>Coordinating Developers, Designers, and SEO Without the Chaos</h3>
-        <p>When multiple contributors work on one project, alignment matters more than speed. Here's the structure I use to keep everyone moving in the same direction.</p>
-        <div class="post-read">Read article →</div>
-      </div>
-      <div class="pcard post-card">
-        <div class="pcard-tags"><span class="tag tag-sun">Local SEO</span></div>
-        <div class="post-date">SEO & Website Growth</div>
-        <h3>What a Google Business Profile Actually Needs to Rank Locally</h3>
-        <p>Posting consistently isn't the same as being optimized. The specific profile details that actually affect local search visibility.</p>
-        <div class="post-read">Read article →</div>
-      </div>
-      <div class="pcard post-card">
-        <div class="pcard-tags"><span class="tag tag-violet">PM</span></div>
-        <div class="post-date">Website Project Management</div>
-        <h3>Scope Creep: How to Spot It Before It Derails Your Project</h3>
-        <p>Small "just one more thing" requests add up. A simple framework for deciding what belongs in the current scope and what doesn't.</p>
-        <div class="post-read">Read article →</div>
-      </div>
-      <div class="pcard post-card">
-        <div class="pcard-tags"><span class="tag tag-teal">GEO/AEO</span></div>
-        <div class="post-date">SEO & Website Growth</div>
-        <h3>Why GEO and AEO Are Starting to Matter for Small Businesses</h3>
-        <p>Search is changing beyond the traditional results page. What generative and answer engine optimization actually mean for your content.</p>
-        <div class="post-read">Read article →</div>
-      </div>
+    <div class="post-grid" id="dynamicPosts" style="margin-top:40px;">
+      <p style="color:var(--muted);">Loading articles…</p>
     </div>
   </div>
 </section>
@@ -182,6 +151,56 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+  function esc(v){
+    return String(v ?? "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+  }
+
+  (async () => {
+    const el = document.getElementById("dynamicPosts");
+    const cfg = window.SUPABASE_CONFIG || {};
+    if(!el || !cfg.url){
+      if(el) el.innerHTML = "<p style='color:var(--muted);'>Articles will appear here.</p>";
+      return;
+    }
+    try{
+      const db = supabase.createClient(cfg.url, cfg.anonKey);
+      const now = new Date().toISOString();
+      const { data, error } = await db.from("posts")
+        .select("id,slug,title,excerpt,image_url,category,created_at,scheduled_at")
+        .eq("published", true)
+        .or(`scheduled_at.is.null,scheduled_at.lte.${now}`)
+        .order("created_at", { ascending: false });
+
+      if(error) throw error;
+
+      if(!data.length){
+        el.innerHTML = "<p style='color:var(--muted);'>No articles published yet — check back soon.</p>";
+        return;
+      }
+
+      el.innerHTML = data.map(p => {
+        const link = `post.html?${p.slug ? "slug=" + encodeURIComponent(p.slug) : "id=" + encodeURIComponent(p.id)}`;
+        const img = p.image_url ? `<img src="${esc(p.image_url)}" alt="${esc(p.title)}" style="width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:14px;">` : "";
+        return `
+          <a href="${link}" class="pcard post-card" style="display:block;">
+            ${img}
+            ${p.category ? `<div class="pcard-tags"><span class="tag tag-violet">${esc(p.category)}</span></div>` : ""}
+            <div class="post-date">${new Date(p.created_at).toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"})}</div>
+            <h3>${esc(p.title)}</h3>
+            <p>${esc(p.excerpt || "")}</p>
+            <div class="post-read">Read article →</div>
+          </a>
+        `;
+      }).join("");
+    } catch(e){
+      el.innerHTML = "<p style='color:var(--muted);'>Articles could not be loaded right now.</p>";
+      console.error(e);
+    }
+  })();
+</script>
 <script src="nav.js"></script>
 </body>
 </html>
