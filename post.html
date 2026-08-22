@@ -3,9 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Digital Project Management and SEO insights.">
+<meta id="metaDescription" name="description" content="Digital Project Management, SEO, and Website insights from Ugochinyere Amaonyeanaso.">
+<link id="canonicalLink" rel="canonical" href="https://digitalpmm.vercel.app/post">
+<meta name="robots" content="index, follow">
+<meta id="ogType" property="og:type" content="article">
+<meta id="ogTitle" property="og:title" content="Blog | Ugochinyere Amaonyeanaso">
+<meta id="ogDescription" property="og:description" content="Digital Project Management, SEO, and Website insights from Ugochinyere Amaonyeanaso.">
+<meta id="ogUrl" property="og:url" content="https://digitalpmm.vercel.app/blog">
+<meta id="ogImage" property="og:image" content="https://digitalpmm.vercel.app/og-default.jpg">
+<meta property="og:site_name" content="Ugochinyere Amaonyeanaso — Digital Project Management">
+<meta id="twitterCard" name="twitter:card" content="summary_large_image">
+<meta id="twitterTitle" name="twitter:title" content="Blog | Ugochinyere Amaonyeanaso">
+<meta id="twitterDescription" name="twitter:description" content="Digital Project Management, SEO, and Website insights from Ugochinyere Amaonyeanaso.">
 <link rel="stylesheet" href="shared.css">
-<title>Post | Ugochinyere Amaonyeanaso</title>
+<title id="pageTitle">Blog | Ugochinyere Amaonyeanaso</title>
 <style>
   .post-hero{padding:70px 0 30px;background:var(--paper);}
   .post-hero .cat{color:var(--violet);font-weight:800;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;display:block;}
@@ -78,6 +89,7 @@
 
     if((!id && !slug) || !cfg.url){
       document.getElementById("postTitle").textContent = "Post not found";
+      document.querySelector('meta[name="robots"]').setAttribute("content", "noindex, nofollow");
       return;
     }
 
@@ -90,12 +102,24 @@
     if(error || !data){
       document.getElementById("postTitle").textContent = "Post not found";
       document.getElementById("postBody").innerHTML = "<p>This post may have been removed or is no longer available.</p>";
+      document.querySelector('meta[name="robots"]').setAttribute("content", "noindex, nofollow");
       return;
     }
 
-    document.title = data.title + " | Ugochinyere Amaonyeanaso";
-    const descMeta = document.querySelector('meta[name="description"]');
-    if(descMeta) descMeta.setAttribute("content", data.excerpt || data.title);
+    const pageUrl = `https://digitalpmm.vercel.app/post?${data.slug ? "slug=" + encodeURIComponent(data.slug) : "id=" + encodeURIComponent(data.id)}`;
+    const pageTitle = `${data.title} | Ugochinyere Amaonyeanaso`;
+    const pageDesc = data.excerpt || data.title;
+    const pageImage = data.image_url || "https://digitalpmm.vercel.app/og-default.jpg";
+
+    document.title = pageTitle;
+    document.getElementById("metaDescription").setAttribute("content", pageDesc);
+    document.getElementById("canonicalLink").setAttribute("href", pageUrl);
+    document.getElementById("ogTitle").setAttribute("content", pageTitle);
+    document.getElementById("ogDescription").setAttribute("content", pageDesc);
+    document.getElementById("ogUrl").setAttribute("content", pageUrl);
+    document.getElementById("ogImage").setAttribute("content", pageImage);
+    document.getElementById("twitterTitle").setAttribute("content", pageTitle);
+    document.getElementById("twitterDescription").setAttribute("content", pageDesc);
 
     document.getElementById("postTitle").textContent = data.title;
     document.getElementById("postDate").textContent = new Date(data.created_at).toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"});
