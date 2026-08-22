@@ -8,7 +8,7 @@
   --violet:#b2227a;
   --violet-dark:#4a1354;
   --coral:#b2227a;
-  --sun:#4a1354;
+  --sun:#fdf4e2;
   --teal:#4a1354;
   --ink:#171217;
   --muted:#665f66;
@@ -204,6 +204,25 @@ footer{background:var(--ink);padding:56px 0 32px;color:rgba(255,251,245,0.85);}
 a:focus-visible, button:focus-visible{
   outline:2px solid var(--violet);
   outline-offset:3px;
+}
+
+/* ===== WHATSAPP FLOATING BUTTON ===== */
+.whatsapp-float{
+  position:fixed;
+  bottom:24px;right:24px;
+  z-index:70;
+  width:58px;height:58px;
+  border-radius:50%;
+  background:#25D366;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 26px -6px rgba(0,0,0,0.4);
+  transition:transform 0.2s;
+}
+.whatsapp-float:hover{transform:scale(1.08);}
+.whatsapp-float svg{width:30px;height:30px;fill:#fff;}
+@media (max-width:600px){
+  .whatsapp-float{width:52px;height:52px;bottom:18px;right:18px;}
+  .whatsapp-float svg{width:26px;height:26px;}
 }
 
 @media (prefers-reduced-motion: reduce){
