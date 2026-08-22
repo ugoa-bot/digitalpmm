@@ -13,7 +13,13 @@
   .post-hero .date{color:var(--muted);font-size:13.5px;margin-top:14px;}
   .post-image{width:100%;max-height:440px;object-fit:cover;border-radius:18px;margin:32px 0;display:none;}
   .post-body{max-width:760px;margin:0 auto;padding-bottom:80px;font-size:16.5px;line-height:1.8;color:var(--ink);}
-  .post-body p{margin-bottom:20px;white-space:pre-wrap;}
+  .post-body p{margin-bottom:20px;}
+  .post-body h2{font-size:26px;margin:36px 0 16px;color:var(--violet-dark);}
+  .post-body h3{font-size:21px;margin:30px 0 14px;color:var(--violet-dark);}
+  .post-body h4{font-size:18px;margin:24px 0 12px;color:var(--ink);}
+  .post-body ul{margin:0 0 20px 22px;}
+  .post-body li{margin-bottom:8px;}
+  .post-body strong{color:var(--ink);}
   .post-nav{max-width:760px;margin:0 auto;padding-top:20px;border-top:1px solid var(--line);}
 </style>
 </head>
@@ -107,9 +113,72 @@
       img.style.display = "block";
     }
 
-    const paragraphs = String(data.content || "").split(/\n\s*\n/);
-    document.getElementById("postBody").innerHTML = paragraphs.map(p => `<p>${esc(p)}</p>`).join("");
+    document.getElementById("postBody").innerHTML = renderContent(data.content || "");
   })();
+
+  // Supports two authoring styles:
+  // 1. Raw HTML pasted directly (starts with a tag like <p> or <h2>) — used as-is.
+  // 2. Plain text with #/##/### headings, - for lists, **bold** — converted to HTML.
+  // Either way, the output has real heading tags for SEO, not flat paragraphs.
+  function renderContent(raw){
+    const trimmed = String(raw).trim();
+    if(/^</.test(trimmed)){
+      return trimmed;
+    }
+    return renderMarkdown(trimmed);
+  }
+
+  function renderMarkdown(raw){
+    const lines = String(raw).replace(/\r\n/g, "\n").split("\n");
+    let html = "";
+    let listBuffer = [];
+    let paraBuffer = [];
+
+    function inline(text){
+      text = esc(text);
+      text = text.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+      text = text.replace(/\*(.+?)\*/g, "<em>$1</em>");
+      return text;
+    }
+    function flushList(){
+      if(listBuffer.length){
+        html += "<ul>" + listBuffer.map(li => `<li>${inline(li)}</li>`).join("") + "</ul>";
+        listBuffer = [];
+      }
+    }
+    function flushPara(){
+      if(paraBuffer.length){
+        html += `<p>${inline(paraBuffer.join(" "))}</p>`;
+        paraBuffer = [];
+      }
+    }
+
+    for(const rawLine of lines){
+      const line = rawLine.trim();
+
+      if(line === ""){
+        flushList();
+        flushPara();
+        continue;
+      }
+
+      const h3 = line.match(/^###\s+(.*)/);
+      const h2 = line.match(/^##\s+(.*)/);
+      const h1 = line.match(/^#\s+(.*)/);
+      const li = line.match(/^[-*]\s+(.*)/);
+
+      if(h3){ flushList(); flushPara(); html += `<h4>${inline(h3[1])}</h4>`; continue; }
+      if(h2){ flushList(); flushPara(); html += `<h3>${inline(h2[1])}</h3>`; continue; }
+      if(h1){ flushList(); flushPara(); html += `<h2>${inline(h1[1])}</h2>`; continue; }
+      if(li){ flushPara(); listBuffer.push(li[1]); continue; }
+
+      flushList();
+      paraBuffer.push(line);
+    }
+    flushList();
+    flushPara();
+    return html;
+  }
 </script>
 <a href="https://wa.me/2348103716553" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chat on WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.21 8.21 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.4-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.48-1.39-1.73-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.36-.77-1.86-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.57.12.17 1.75 2.67 4.25 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.14-1.18-.06-.11-.23-.17-.48-.29Z"/></svg>

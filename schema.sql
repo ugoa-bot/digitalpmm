@@ -1,3 +1,9 @@
+-- ============================================================
+-- Digital Project Management Blog CMS — Supabase Setup
+-- Run this once in your Supabase project's SQL Editor:
+-- Project → SQL Editor → New Query → paste this whole file → Run
+-- ============================================================
+
 -- 1. POSTS TABLE
 create table if not exists posts (
   id uuid primary key default gen_random_uuid(),
@@ -74,3 +80,11 @@ create policy "Authenticated can delete blog images"
 on storage.objects for delete
 to authenticated
 using (bucket_id = 'blog-images');
+
+-- ============================================================
+-- After running this:
+-- 1. Go to Authentication → Users in Supabase and create yourself
+--    a login (email + password) — that's what you'll use to log
+--    into admin.html.
+-- 2. You're ready to publish from admin.html.
+-- ============================================================

@@ -87,7 +87,13 @@
     <textarea id="fExcerpt" style="min-height:70px;font-family:inherit;"></textarea>
 
     <label>Content *</label>
-    <textarea id="fContent" placeholder="Write your post here. Line breaks are preserved."></textarea>
+    <textarea id="fContent" placeholder="Write your post here."></textarea>
+    <div class="hint">
+      For proper heading structure (good for SEO), use:<br>
+      <strong># Heading</strong> for a main section, <strong>## Subheading</strong> for a sub-section,
+      <strong>- item</strong> for bullet points, and <strong>**bold text**</strong> for bold.
+      Leave a blank line between paragraphs. You can also paste raw HTML if you prefer.
+    </div>
 
     <label>Blog Image</label>
     <input type="file" id="fImageFile" accept="image/*" onchange="previewImage()">
