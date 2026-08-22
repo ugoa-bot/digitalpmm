@@ -1,20 +1,4 @@
 {
-  "rewrites": [
-    {
-      "source": "/digital-project-management",
-      "destination": "/digital-project-management.html"
-    },
-    {
-      "source": "/website-development",
-      "destination": "/website-development.html"
-    },
-    {
-      "source": "/seo",
-      "destination": "/seo.html"
-    },
-    {
-      "source": "/project-management-consulting",
-      "destination": "/project-management-consulting.html"
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
