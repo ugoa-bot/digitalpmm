@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://digitalpmm.vercel.app/sitemap.xml
+Sitemap: https://khendigital.com/sitemap.xml
