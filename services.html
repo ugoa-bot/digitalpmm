@@ -1,16 +1,16 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Learn about Ugochinyere, a Digital Project Manager and Consultant working across digital projects, website development, SEO, business operations, and digital systems.">
-<title>About Ugochinyere | Digital Project Manager & Consultant</title>
+<meta name="description" content="Explore digital project management, website development, SEO, and project management consulting services for organizations and businesses.">
+<title>Digital Project Management, Website Development & SEO Services</title>
 <meta name="robots" content="index, follow, max-image-preview:large">
-<link rel="canonical" href="https://www.khendigital.com/about">
+<link rel="canonical" href="https://www.khendigital.com/services">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Khen Digital">
-<meta property="og:title" content="About Ugochinyere | Digital Project Manager & Consultant">
-<meta property="og:description" content="Learn about Ugochinyere, a Digital Project Manager and Consultant working across digital projects, website development, SEO, business operations, and digital systems.">
-<meta property="og:url" content="https://www.khendigital.com/about">
+<meta property="og:title" content="Digital Project Management, Website Development & SEO Services">
+<meta property="og:description" content="Explore digital project management, website development, SEO, and project management consulting services for organizations and businesses.">
+<meta property="og:url" content="https://www.khendigital.com/services">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="About Ugochinyere | Digital Project Manager & Consultant">
-<meta name="twitter:description" content="Learn about Ugochinyere, a Digital Project Manager and Consultant working across digital projects, website development, SEO, business operations, and digital systems."><style>
+<meta name="twitter:title" content="Digital Project Management, Website Development & SEO Services">
+<meta name="twitter:description" content="Explore digital project management, website development, SEO, and project management consulting services for organizations and businesses."><style>
 :root{--pink:#b2227a;--cream:#fdf4e2;--purple:#4a1354;--ink:#171217;--muted:#665f66;--white:#fff;--line:#eadfe7;--soft:#fff8fb}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Poppins,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.65}a{text-decoration:none;color:inherit}
 .container{width:min(1140px,92%);margin:auto}
@@ -104,19 +104,98 @@ header{background:#000!important;position:sticky!important;top:0!important}
 .section-soft .section-title h2,.section-soft .section-title h3,
 .section-cream .section-title h2,.section-cream .section-title h3{color:#fff!important}
 
-.about-writeup-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-.about-writeup-cta .btn-outline{border-color:#fff;color:#fff}
-.about-writeup-cta .btn-outline:hover{background:rgba(255,255,255,.1)}
-@media(max-width:850px){.about-writeup-cta{flex-direction:column}.about-writeup-cta .btn{width:100%}}
-</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"About Ugochinyere | Digital Project Manager & Consultant","description":"Learn about Ugochinyere, a Digital Project Manager and Consultant working across digital projects, website development, SEO, business operations, and digital systems.","url":"https://www.khendigital.com/about","isPartOf":{"@type":"WebSite","name":"Khen Digital","url":"https://www.khendigital.com/"}}</script>
+/* Final visual hierarchy and responsive layout */
+.section-title h2.kicker{
+  font-size:clamp(32px,4.2vw,48px)!important;
+  line-height:1.08!important;
+  color:var(--ink)!important;
+  text-transform:none!important;
+  letter-spacing:-.035em!important;
+  margin:0!important;
+}
+.section-title h3{
+  font-size:clamp(18px,2vw,24px)!important;
+  line-height:1.35!important;
+  color:#4b454b!important;
+  margin:10px 0 14px!important;
+  font-weight:600!important;
+}
+.section-title p{color:#4b454b!important}
+.section-soft,.section-cream{background:#000!important;color:#fff!important}
+.section-soft .section-title h2.kicker,.section-cream .section-title h2.kicker{color:#fff!important}
+.section-soft .section-title h3,.section-cream .section-title h3,
+.section-soft .section-title p,.section-cream .section-title p{color:#d8d0d7!important}
+
+/* Dark readable text inside white cards */
+.card h3,.card h2{color:var(--ink)!important}
+.card p,.card li{color:#302b30!important}
+.card strong{color:var(--ink)!important}
+.problem{color:#302b30!important}
+.problem strong{color:var(--ink)!important}
+
+/* Process hierarchy */
+.process-dark .section-title h2.kicker{color:#fff!important}
+.process-dark .section-title h3{color:#d8d0d7!important;font-size:clamp(18px,2vw,24px)!important}
+.process-dark .step h3{color:#fff!important}
+
+/* White CTA treatment */
+.cta{background:#fff!important;color:var(--ink)!important;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cta h2{color:var(--ink)!important;font-size:clamp(30px,4vw,48px)!important}
+.cta p{color:#4b454b!important}
+.cta .btn-light{border-color:var(--purple)!important;color:var(--purple)!important}
+.quote{background:#fff!important;color:var(--ink)!important;border:1px solid var(--line)}
+.quote h2{color:var(--ink)!important}
+.quote p{color:#4b454b!important}
+
+/* Reduce action-button visual weight */
+.section .actions .btn{padding:11px 17px;font-size:14px}
+
+/* Mobile: clean single-column sections and process */
+@media(max-width:850px){
+  .section{padding:58px 0!important}
+  .section-title{margin-bottom:28px!important}
+  .section-title h2.kicker{font-size:32px!important}
+  .section-title h3{font-size:18px!important}
+  .grid-2,.grid-3{grid-template-columns:1fr!important;gap:16px!important}
+  .card{padding:22px!important}
+  .problem{padding:20px!important}
+  .process{display:block!important}
+  .step{padding:22px 8px 22px 58px!important}
+  .case-body{padding:22px!important}
+  .case h3{font-size:22px!important}
+  .cta{padding:55px 0!important}
+  .cta h2{font-size:32px!important}
+  .quote{padding:25px!important}
+  .section .actions{display:flex!important;flex-direction:column!important;align-items:stretch!important}
+  .section .actions .btn{width:100%!important}
+}
+
+/* Service copy readability */
+.service-detail p,.service-detail li,.card p,.card li,.service-copy p{color:#171217!important}
+.service-detail h3,.service-detail h4,.card h3,.card h4{color:#171217!important}
+
+.project-image,.service-image{display:block;width:100%;height:250px;object-fit:cover;object-position:center;border-radius:18px 18px 0 0;background:#fdf4e2}
+.case .project-image{border-radius:18px 18px 0 0}
+.service-card{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#fff}
+.service-card .card-body{padding:28px}
+.service-card h3{color:var(--purple);margin:0 0 10px}
+.service-card p{color:var(--muted)}
+.learn-more{display:inline-flex;margin-top:12px;background:var(--pink)!important;color:#fff!important;padding:11px 17px;border-radius:9px;font-weight:800}
+@media(max-width:850px){.project-image,.service-image{height:auto;aspect-ratio:16/9;object-fit:cover}.case-body{padding:22px}.service-card .card-body{padding:22px}}
+</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Digital Project Management, Website Development & SEO Services","description":"Explore digital project management, website development, SEO, and project management consulting services for organizations and businesses.","url":"https://www.khendigital.com/services","isPartOf":{"@type":"WebSite","name":"Khen Digital","url":"https://www.khendigital.com/"}}</script>
 </head><body><header><div class="container nav">
 <a class="logo" href="index.html">Digital Project Management Services</a>
 <nav class="navlinks">
 <a href="index.html">Home</a><a href="/services">Services</a><a href="/projects">Projects</a><a href="/about">About</a><a href="/blog">Blog</a><a href="/contact">Contact</a>
 <a class="btn btn-primary" href="https://calendly.com/ugochinyere" target="_blank">Book a Consultation</a>
-</nav><button class="menu" aria-label="Open menu" aria-expanded="false">☰</button></div></header><main><section class="page-hero"><div class="container"><h2 class="kicker">About</h2><h1>My name is Ugochinyere Amaonyeanaso.</h1><p>I'm a Digital Project Manager working across websites, software, mobile apps, SEO, and marketing projects.</p></div></section>
-<section class="section"><div class="container"><div class="about-grid"><img class="about-photo" src="ugo-profile.jpeg" alt="Ugochinyere Amaonyeanaso"><div><div class="section-title"><h2 class="kicker">My approach</h2><h3>I understand the project and the business behind it.</h3><p>I also work directly with business owners who need help with their websites, SEO, Google Business Profile, and online visibility.</p></div><div class="quote"><h2>I don't just manage the task. I look at the problem the project is supposed to solve.</h2><p>A website can be delivered on time and still fail to support the business. An SEO campaign can generate traffic without generating the right enquiries. A software project can be completed without properly solving the original business requirement.</p><p>That's why I look at the business goal, project requirements, stakeholders, timeline, technical work, SEO, quality, and final outcome.</p></div><div class="about-writeup-cta"><a class="btn btn-primary" href="/contact">Let's Work Together</a><a class="btn btn-outline" href="https://calendly.com/ugochinyere" target="_blank" rel="noopener">Book a Consultation</a></div></div></div></div></section>
-<section class="section section-soft"><div class="container"><div class="section-title"><h2 class="kicker">How I work</h2><h3>From Planning to Delivery</h2></div><div class="process"><div class="step"><h3>Understand</h3><p>I understand the business, project goals, requirements, stakeholders, and expected outcome.</p></div><div class="step"><h3>Plan</h3><p>I define the scope, deliverables, resources, timeline, and work breakdown.</p></div><div class="step"><h3>Coordinate</h3><p>I work with developers, designers, SEO specialists, content teams, and other contributors.</p></div><div class="step"><h3>Track</h3><p>I monitor tasks, deadlines, dependencies, risks, issues, changes, and outstanding requirements.</p></div><div class="step"><h3>Review</h3><p>I check deliverables against the agreed requirements and coordinate quality assurance.</p></div><div class="step"><h3>Deliver</h3><p>The project is completed, reviewed, handed over, and properly closed.</p></div></div></div></section></main><footer><div class="container"><div class="footer-grid">
+</nav><button class="menu" aria-label="Open menu" aria-expanded="false">☰</button></div></header><main><section class="page-hero"><div class="container"><h2 class="kicker">Services</h2><h1>Digital Project Management, SEO & Website Development</h1><p>I provide digital project management for organizations and hands-on website and SEO services for businesses.</p></div></section>
+<section class="section" id="project-management"><div class="container"><div class="section-title"><h2 class="kicker">For organizations</h2><h3>Digital Project Management</h3><p>Keep your digital project moving from planning to delivery.</p></div>
+<div class="service-card"><img class="service-image" src="assets/service-project-management.svg" alt="Digital project management service"><div class="card-body"><h3>Digital Project Management</h3><p>I help organizations plan, coordinate, and manage digital projects from initiation through delivery.</p><a class="learn-more" href="digital-project-management">Learn More</a></div></div><div class="service-detail"><h2>What I Manage</h2><h3>Website Projects</h3><p>Planning, requirements, design, development, testing, SEO setup, quality assurance, and launch.</p><h3>Software Development Projects</h3><p>Requirements, development coordination, testing, timelines, stakeholders, and delivery.</p><h3>Mobile App Projects</h3><p>Planning, development coordination, testing, requirements, and delivery.</p><h3>SEO Projects</h3><p>Technical SEO, On-Page SEO, Local SEO, content, audits, implementation, and tracking.</p><h3>Marketing Projects</h3><p>Content, campaigns, deliverables, timelines, and coordination.</p></div>
+<div class="grid-2"><div class="card"><h3>Scope & Requirements</h3><p>Defining what needs to be delivered and making sure everyone understands the requirements.</p></div><div class="card"><h3>Stakeholder Management</h3><p>Understanding expectations, communication needs, approvals, and priorities.</p></div><div class="card"><h3>Timeline Management</h3><p>Creating realistic timelines and accounting for possible delays and unexpected events.</p></div><div class="card"><h3>Team Coordination</h3><p>Working with developers, designers, content teams, SEO specialists, and other contributors.</p></div><div class="card"><h3>Project Tracking</h3><p>Tracking tasks, deadlines, dependencies, risks, issues, and changes.</p></div><div class="card"><h3>Quality Assurance</h3><p>Reviewing deliverables against agreed requirements before moving forward.</p></div></div></div></section>
+<section class="section section-cream" id="seo"><div class="container"><div class="section-title"><h2 class="kicker">For businesses</h2><h3>SEO Services</h3><p>Help the right people find your business online.</p></div>
+<div class="service-card"><img class="service-image" src="assets/service-seo.svg" alt="SEO service"><div class="card-body"><h3>SEO</h3><p>I help businesses improve their online visibility through technical SEO, on-page SEO, content SEO, local SEO, and website optimization.</p><a class="learn-more" href="seo">Learn More</a></div></div><div class="grid-2"><div class="service-detail"><h2>Technical SEO</h2><p>Crawlability, indexing, page titles, meta descriptions, H1, H2 and H3 structure, internal linking, URL structure, image optimization, mobile responsiveness, website performance, and technical SEO issues.</p></div><div class="service-detail"><h2>On-Page SEO</h2><p>Keyword research, page content, headings, service pages, URLs, images, internal links, and content structure.</p></div><div class="service-detail"><h2>Local SEO</h2><p>Google Business Profile setup and optimization, local keyword optimization, location-specific content, and local search optimization.</p></div><div class="service-detail"><h2>SEO Audits & Indexing</h2><p>Identify issues affecting SEO, technical health, indexing, performance, and visibility, including problems preventing important pages from being discovered.</p></div><div class="service-detail"><h2>GEO</h2><p>Generative Engine Optimization. I consider how content is structured and presented for visibility across generative search experiences.</p></div><div class="service-detail"><h2>AEO</h2><p>Answer Engine Optimization. I structure content around questions people are asking, with clear and useful answers for answer-focused search experiences.</p></div></div></div></section>
+<section class="section" id="website"><div class="container"><div class="section-title"><h2 class="kicker">Website services</h2><h3>Website Development</h3><p>Build a website that supports the business behind it.</p></div><div class="service-card"><img class="service-image" src="assets/service-website.svg" alt="Website development service"><div class="card-body"><h3>Website Development</h3><p>I build business websites designed around your goals, your customers, and the actions you want visitors to take.</p><a class="learn-more" href="website-development">Learn More</a></div></div><div class="service-detail"><h2>Website Projects</h2><p>Business websites, custom-coded websites, landing pages, blog websites, website redesigns, service websites, and SEO-ready websites.</p><h3>What I consider during a website project</h3><ul><li>Scope and requirements</li><li>Page and information structure</li><li>SEO</li><li>Conversion</li><li>Quality assurance</li></ul></div></div></section>
+<section class="section section-soft"><div class="container"><div class="section-title"><h2 class="kicker">Consulting</h2><h3>Digital Project Management Consulting</h3><p>One-on-one support for organizations and teams working on digital projects.</p></div><div class="service-card"><img class="service-image" src="assets/service-consulting.svg" alt="Project management consulting service"><div class="card-body"><h3>Project Management Consulting</h3><p>Need a project manager for a specific period or project?</p><a class="learn-more" href="project-management-consulting">Learn More</a></div></div><div class="card"><p>We can discuss project scope, requirements, project planning, website project management, software project management, stakeholder management, project timelines, project workflows, and digital project delivery.</p><a class="btn btn-primary" href="https://calendly.com/ugochinyere" target="_blank">Book a Consultation</a></div></div></section></main><footer><div class="container"><div class="footer-grid">
 <div><div class="footer-logo">Digital Project Management Services</div><p>I help organizations manage digital projects and help businesses build, improve, and grow their online presence.</p></div>
 <div><h4>Quick Links</h4><p><a href="index.html">Home</a></p><p><a href="/services">Services</a></p><p><a href="/projects">Projects</a></p><p><a href="/about">About</a></p><p><a href="/blog">Blog</a></p><p><a href="/contact">Contact</a></p></div>
 <div><h4>Services</h4><p>Digital Project Management</p><p>SEO</p><p>Website Development</p><p>Google Business Profile</p></div>
