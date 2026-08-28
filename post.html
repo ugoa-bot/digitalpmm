@@ -4,19 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta id="metaDescription" name="description" content="Digital Project Management, SEO, and Website insights from Ugochinyere Amaonyeanaso.">
-<link rel="canonical" href="https://www.khendigital.com/post">
+<link id="canonicalLink" rel="canonical" href="https://khendigital.com/post">
 <meta name="robots" content="index, follow">
 <meta id="ogType" property="og:type" content="article">
-<meta property="og:title" content="Blog | Khen Digital">
-<meta property="og:description" content="Digital project management, SEO, website development, and business visibility insights from Khen Digital.">
-<meta property="og:url" content="https://www.khendigital.com/post">
-<meta id="ogImage" property="og:image" content="https://www.khendigital.com/og-default.jpg">
-<meta property="og:site_name" content="Khen Digital">
+<meta id="ogTitle" property="og:title" content="Blog | Ugochinyere Amaonyeanaso">
+<meta id="ogDescription" property="og:description" content="Digital Project Management, SEO, and Website insights from Ugochinyere Amaonyeanaso.">
+<meta id="ogUrl" property="og:url" content="https://khendigital.com/blog">
+<meta id="ogImage" property="og:image" content="https://khendigital.com/og-default.jpg">
+<meta property="og:site_name" content="Ugochinyere Amaonyeanaso — Digital Project Management">
 <meta id="twitterCard" name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Blog | Khen Digital">
-<meta name="twitter:description" content="Digital project management, SEO, website development, and business visibility insights from Khen Digital.">
+<meta id="twitterTitle" name="twitter:title" content="Blog | Ugochinyere Amaonyeanaso">
+<meta id="twitterDescription" name="twitter:description" content="Digital Project Management, SEO, and Website insights from Ugochinyere Amaonyeanaso.">
 <link rel="stylesheet" href="shared.css">
-<title>Blog | Khen Digital</title>
+<title id="pageTitle">Blog | Ugochinyere Amaonyeanaso</title>
 <style>
   .post-hero{padding:70px 0 30px;background:var(--paper);}
   .post-hero .cat{color:var(--violet);font-weight:800;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;display:block;}
@@ -33,10 +33,6 @@
   .post-body strong{color:var(--ink);}
   .post-nav{max-width:760px;margin:0 auto;padding-top:20px;border-top:1px solid var(--line);}
 </style>
-<meta name="description" content="Digital project management, SEO, website development, and business visibility insights from Khen Digital.">
-<meta name="author" content="Ugochinyere Amaonyeanaso">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://www.khendigital.com/#website","url":"https://www.khendigital.com/","name":"Khen Digital","publisher":{"@type":"Organization","name":"Khen Digital","url":"https://www.khendigital.com/"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.khendigital.com/post"},"headline":"Blog | Khen Digital","description":"Digital project management, SEO, website development, and business visibility insights from Khen Digital.","author":{"@type":"Person","name":"Ugochinyere Amaonyeanaso"},"publisher":{"@type":"Organization","name":"Khen Digital","url":"https://www.khendigital.com/"}}</script>
 </head>
 <body>
 
@@ -110,10 +106,10 @@
       return;
     }
 
-    const pageUrl = `https://www.khendigital.com/post?${data.slug ? "slug=" + encodeURIComponent(data.slug) : "id=" + encodeURIComponent(data.id)}`;
+    const pageUrl = `https://khendigital.com/post?${data.slug ? "slug=" + encodeURIComponent(data.slug) : "id=" + encodeURIComponent(data.id)}`;
     const pageTitle = `${data.title} | Ugochinyere Amaonyeanaso`;
     const pageDesc = data.excerpt || data.title;
-    const pageImage = data.image_url || "https://www.khendigital.com/og-default.jpg";
+    const pageImage = data.image_url || "https://khendigital.com/og-default.jpg";
 
     document.title = pageTitle;
     document.getElementById("metaDescription").setAttribute("content", pageDesc);
@@ -124,23 +120,6 @@
     document.getElementById("ogImage").setAttribute("content", pageImage);
     document.getElementById("twitterTitle").setAttribute("content", pageTitle);
     document.getElementById("twitterDescription").setAttribute("content", pageDesc);
-
-    // Keep the article metadata aligned with the CMS post and provide Article structured data.
-    const articleSchema = {
-      "@context":"https://schema.org",
-      "@type":"BlogPosting",
-      "mainEntityOfPage":{"@type":"WebPage","@id":pageUrl},
-      "headline":data.title,
-      "description":pageDesc,
-      "url":pageUrl,
-      "datePublished":data.created_at,
-      "dateModified":data.updated_at || data.created_at,
-      "author":{"@type":"Person","name":"Ugochinyere Amaonyeanaso"},
-      "publisher":{"@type":"Organization","name":"Khen Digital","url":"https://www.khendigital.com/"}
-    };
-    let articleLd=document.getElementById("articleLd");
-    if(!articleLd){articleLd=document.createElement("script");articleLd.type="application/ld+json";articleLd.id="articleLd";document.head.appendChild(articleLd);}
-    articleLd.textContent=JSON.stringify(articleSchema);
 
     document.getElementById("postTitle").textContent = data.title;
     document.getElementById("postDate").textContent = new Date(data.created_at).toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"});
