@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<title>Page Not Found | Khen Digital</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .notfound-hero{
+    min-height:70vh;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;
+    background:radial-gradient(circle at 50% 20%, rgba(178,34,122,0.12), transparent 50%), var(--paper);
+    padding:60px 24px;
+  }
+  .notfound-code{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:800;
+    font-size:clamp(60px,10vw,110px);
+    color:var(--violet);
+    line-height:1;
+    margin-bottom:10px;
+  }
+  .notfound-hero h1{font-size:clamp(24px,4vw,34px);margin-bottom:14px;}
+  .notfound-hero p{color:var(--muted);font-size:16px;max-width:440px;margin:0 auto 30px;}
+  .notfound-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;height:78px;">
+    <a href="/" class="brand"><span class="dot"></span>Digital Project Management</a>
+    <div class="navlinks">
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/projects">Projects</a>
+      <a href="/about">About</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact">Contact</a>
+      <a class="btn btn-primary" href="https://calendly.com/ugochinyere" target="_blank" rel="noopener">Book a Consultation</a>
+    </div>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+  </div>
+</nav>
+
+<section class="notfound-hero">
+  <div>
+    <div class="notfound-code">404</div>
+    <h1>This page doesn't exist.</h1>
+    <p>The page you're looking for may have been moved or removed. Try one of these instead:</p>
+    <div class="notfound-links">
+      <a href="/" class="btn btn-primary">Back to Home</a>
+      <a href="/services" class="btn btn-outline">Services</a>
+      <a href="/projects" class="btn btn-outline">Projects</a>
+      <a href="/blog" class="btn btn-outline">Blog</a>
+      <a href="/contact" class="btn btn-outline">Contact</a>
+    </div>
+  </div>
+</section>
+
+<script src="nav.js"></script>
+</body>
+</html>

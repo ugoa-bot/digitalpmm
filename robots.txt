@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
-Disallow: /admin.html
+
 Disallow: /admin
-Disallow: /thank-you.html
+Disallow: /admin.html
+
 Sitemap: https://www.khendigital.com/sitemap.xml
