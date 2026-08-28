@@ -1,4 +1,96 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/services/index.html"
+    },
+    {
+      "source": "/services/digital-project-management",
+      "destination": "/services/digital-project-management.html"
+    },
+    {
+      "source": "/services/website-development",
+      "destination": "/services/website-development.html"
+    },
+    {
+      "source": "/services/seo",
+      "destination": "/services/seo.html"
+    },
+    {
+      "source": "/services/consulting",
+      "destination": "/services/consulting.html"
+    },
+    {
+      "source": "/projects",
+      "destination": "/projects.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/services/index.html",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/services/digital-project-management.html",
+      "destination": "/services/digital-project-management",
+      "permanent": true
+    },
+    {
+      "source": "/services/website-development.html",
+      "destination": "/services/website-development",
+      "permanent": true
+    },
+    {
+      "source": "/services/seo.html",
+      "destination": "/services/seo",
+      "permanent": true
+    },
+    {
+      "source": "/services/consulting.html",
+      "destination": "/services/consulting",
+      "permanent": true
+    },
+    {
+      "source": "/projects.html",
+      "destination": "/projects",
+      "permanent": true
+    },
+    {
+      "source": "/blog.html",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact",
+      "permanent": true
+    }
+  ]
 }
